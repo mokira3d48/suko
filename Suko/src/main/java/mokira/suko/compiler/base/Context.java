@@ -4,20 +4,13 @@
  */
 package mokira.suko.compiler.base;
 
-/**
- *
- * @author mokira3d48
- * @param <I>
- * @param <C>
- * @param <O>
- */
-public class Compiler<I, C, O> extends Pipeline<I, C, O> {
+import java.util.HashMap;
 
-	/**
-	 *
-   * @param currentStep
-	 */
-	public Compiler(Handler<I, C, O> currentStep) {
-		super(currentStep);
-	}
+/**
+ * This abstract class is used to define a context
+ * compilation for each step of the compilation step.
+ * 
+ * @author mokira3d48
+ */
+public class Context extends HashMap<String, Object> {
 }

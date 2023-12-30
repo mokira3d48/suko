@@ -5,22 +5,22 @@
 package mokira.suko.compiler;
 
 import mokira.suko.compiler.base.CompilationStep;
-import mokira.suko.compiler.base.Handler;
 import mokira.suko.compiler.base.Pipeline;
+import mokira.suko.compiler.base.Context;
 
 
 /**
  *
  * @author mokira3d48
  */
-public class SyntaxAnalyser extends CompilationStep<String[], Float> {
+public class SyntaxAnalyser extends CompilationStep<String[], Context, Float> {
 
 	/**
 	 *
 	 * @param matching: The matching pipeline.
-	 * @param parsing: The parsing pipeline.
+	 * @param parsing:  The parsing pipeline.
 	 */
-	public SyntaxAnalyser(Pipeline<String[], Boolean> matching, Pipeline<String[], Float> parsing) {
+	public SyntaxAnalyser(Pipeline<String[], Context, Boolean> matching, Pipeline<String[], Context, Float> parsing) {
 		super(matching, parsing);
 	}
 }

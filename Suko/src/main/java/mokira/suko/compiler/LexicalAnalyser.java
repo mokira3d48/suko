@@ -5,6 +5,7 @@
 package mokira.suko.compiler;
 
 import mokira.suko.compiler.base.CompilationStep;
+import mokira.suko.compiler.base.Context;
 import mokira.suko.compiler.base.Pipeline;
 
 
@@ -12,14 +13,15 @@ import mokira.suko.compiler.base.Pipeline;
  *
  * @author mokira3d48
  */
-public class LexicalAnalyser extends CompilationStep<String, String[]> {
+public class LexicalAnalyser extends CompilationStep<String,Context, String[]> {
 
 	/**
 	 *
 	 * @param matching: The matching pipeline instance.
 	 * @param parsing: The parsing pipeline instance.
 	 */
-	public LexicalAnalyser(Pipeline<String, Boolean> matching, Pipeline<String, String[]> parsing) {
+	public LexicalAnalyser(Pipeline<String, Context, Boolean> matching,
+                         Pipeline<String, Context, String[]> parsing) {
 		super(matching, parsing);
 	}
 }

@@ -9,15 +9,16 @@ package mokira.suko.compiler.base;
  *
  * @author mokira3d48
  * @param <I>
+ * @param <C>
  * @param <O>
  */
-public class Pipeline<I, O> {
-	protected Handler<I, O> currentHandler;
+public class Pipeline<I, C, O> {
+	protected Handler<I, C, O> currentHandler;
 
 	/**
 	 * @param currentHandler: Represents the first handler will be executed in the pipeline.
 	 */
-	public Pipeline(Handler<I, O> currentHandler) {
+	public Pipeline(Handler<I, C, O> currentHandler) {
 		this.currentHandler = currentHandler;
 	}
 
@@ -29,8 +30,8 @@ public class Pipeline<I, O> {
 	 * @param newHandler
 	 * @return
 	 */
-	public <K> Pipeline<I, K> addHandler(Handler<O, K> newHandler) {
-		return new Pipeline<>(input -> newHandler.process(currentHandler.process(input)));
+	public <K> Pipeline<I, C, K> addHandler(Handler<O, C, K> newHandler) {
+		return new Pipeline<>((I inp, C co) -> newHandler.process(currentHandler.process(inp, co), co));
 	}
 
 	/**
@@ -38,10 +39,11 @@ public class Pipeline<I, O> {
 	 * added into the pipeline instance
 	 * 
 	 * @param input
+   * @param co
 	 * @return
 	 */
-	public O execute(I input) {
-		return this.currentHandler.process(input);
+	public O execute(I input, C co) {
+		return this.currentHandler.process(input, co);
 	}
 }
 

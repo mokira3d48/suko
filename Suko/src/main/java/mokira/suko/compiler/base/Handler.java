@@ -7,16 +7,20 @@ package mokira.suko.compiler.base;
 /**
  *
  * @author mokira3d48
+ * @param <I>
+ * @param <C>
+ * @param <O>
  */
 @FunctionalInterface
-public interface Handler<I, O> {
+public interface Handler<I, C, O> {
 
 	/**
 	 * Process method must be implemented by extension
 	 * or by creation of a lambda expression
 	 * 
 	 * @param input
+   * @param context
 	 * @return 
 	 */
-  public O process(I input);
+  public O process(I input, C context);
 }

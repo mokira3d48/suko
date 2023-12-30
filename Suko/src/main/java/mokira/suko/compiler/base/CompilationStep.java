@@ -11,17 +11,18 @@ package mokira.suko.compiler.base;
  *
  * @author mokira3d48
  * @param <I>
+ * @param <Context>
  * @param <O>
  */
-public class CompilationStep<I, O> implements Handler<I, O> {
-	protected Pipeline<I, Boolean> matchingPipeline;   // Pipeline for the building calculus tree
-	protected Pipeline<I, O> parsingPipeline;  				 // Pipeline for the matching of the syntaxe
+public class CompilationStep<I, Context, O> implements Handler<I, Context, O> {
+	protected Pipeline<I, Context, Boolean> matchingPipeline;   // Pipeline for the building calculus tree
+	protected Pipeline<I, Context, O>       parsingPipeline;  	// Pipeline for the matching of the syntaxe
 
-	public CompilationStep(Pipeline<I, O> parsing) {
+	public CompilationStep(Pipeline<I, Context, O> parsing) {
 		this.parsingPipeline = parsing;
 	}
 
-	public CompilationStep(Pipeline<I, Boolean> matching, Pipeline<I, O> parsing) {
+	public CompilationStep(Pipeline<I, Context, Boolean> matching, Pipeline<I, Context, O> parsing) {
 		this(parsing);
 		this.matchingPipeline = matching;
 	}
@@ -33,15 +34,15 @@ public class CompilationStep<I, O> implements Handler<I, O> {
 	 * @return O representing the output value after parsing.
 	 */
   @Override
-	public O process(I input) {
+	public O process(I input, Context context) {
 		Boolean matched = true;
 		if (this.matchingPipeline != null)
-			matched = this.matchingPipeline.execute(input);
+			matched = this.matchingPipeline.execute(input, context);
 
 		if (!matched)
 			return null;
 
-		return this.parsingPipeline.execute(input);
+		return this.parsingPipeline.execute(input, context);
 	}
 }
 
