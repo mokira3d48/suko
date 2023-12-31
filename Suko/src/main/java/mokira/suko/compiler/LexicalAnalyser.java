@@ -13,7 +13,7 @@ import mokira.suko.compiler.base.Pipeline;
  *
  * @author mokira3d48
  */
-public class LexicalAnalyser extends CompilationStep<String,Context, String[]> {
+public class LexicalAnalyser extends CompilationStep<String, Context, String[]> {
 
 	/**
 	 *

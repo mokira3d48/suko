@@ -46,7 +46,8 @@ public class LexicalParsing implements Handler<String, Context, String[]> {
             temp += parts[i];
           }
           else {
-            tokensList.add(temp);
+            if (!temp.isEmpty())
+              tokensList.add(temp);
             temp = parts[i];
             prevPatt = pattern;
             // System.out.println(tokensList.toString());

@@ -7,10 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import mokira.suko.compiler.base.Compiler;
-import mokira.suko.compiler.DefaultCompiler;
+
+import mokira.suko.compiler.DefaultCompilerBuilder;
 import mokira.suko.compiler.LexicalError;
 import mokira.suko.compiler.base.Context;
+import mokira.suko.compiler.base.Pipeline;
 
 
 /**
@@ -30,21 +31,22 @@ public class App extends Application {
 	}
 
 	public static void main(String[] args) {
-    Pattern[] patterns = new Pattern[3];
+    Pattern[] patterns = new Pattern[4];
     patterns[0] = Pattern.compile("[0-9]");
     patterns[1] = Pattern.compile("\\+");
     patterns[2] = Pattern.compile("-");
-    var defaultCompiler = DefaultCompiler.get(patterns);
+    patterns[3] = Pattern.compile("\\*");
+    var defaultCompiler = (Pipeline) DefaultCompilerBuilder.build(patterns);
     
     String[] tokens = new String[0];
 
     try{
       Context context = new Context();
-      tokens = defaultCompiler.execute("23-3+2+12s", context);
+      tokens = (String[]) defaultCompiler.execute("23-3+2+12x8", context);
     } catch(LexicalError e) {
       System.err.println(e.getMessage());
     } catch(Exception e) {
-      System.out.println("ERROR: " + e);
+      e.printStackTrace();
     }
 
     for (String token: tokens)

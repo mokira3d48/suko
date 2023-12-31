@@ -14,7 +14,7 @@ import mokira.suko.compiler.base.Handler;
 public class Preprocess implements Handler<String, Context, String> {
 
   @Override
-  public String process(String input, Context context) throws Exception {
+  public String process(String input, Context context) {
     String returned = "";
     char characters;
     for (int i = 0; i < input.length(); i++) {
