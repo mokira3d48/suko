@@ -4,59 +4,47 @@
  */
 package mokira.suko.compiler;
 
+import java.util.regex.Pattern;
+
 import mokira.suko.compiler.base.Handler;
 import mokira.suko.compiler.base.Compiler;
 import mokira.suko.compiler.base.CompilationStep;
+import mokira.suko.compiler.base.Context;
 import mokira.suko.compiler.base.Pipeline;
-
-
-class Step3 implements Handler<String[], String[]> {
-
-	@Override
-	public String[] process(String[] tokens) {
-		System.out.println("Step3");
-		return tokens;
-	}
-}
-
-
-class Step4 implements Handler<String[], Float> {
-
-  @Override
-	public Float process(String[] tokens) {
-		System.out.println("Step4");
-		Float number = Float.valueOf(100.0F);
-		return number;
-	}
-}
 
 
 /**
  *
  * @author mokira3d48
  */
-public class DefaultCompiler extends Compiler<String, Float> {
+public class DefaultCompiler extends Compiler<String, Context, String[]> {
 	
-	public DefaultCompiler(Handler<String, Float> currentStep) {
+  /**
+   *
+   * @param currentStep
+   */
+  public DefaultCompiler(Handler<String, Context, String[]> currentStep) {
 		super(currentStep);
 	}
 
 	/**
 	 *
+   * @param patterns
 	 * @return A new instance of the compiler.
 	 */
-	public static DefaultCompiler get() {
-    var lexparsing = new Pipeline<>(new Step3());
-		lexparsing.addHandler(new Step4());
-		LexicalAnalyser lexical = new LexicalAnalyser(lexparsing);
+	public static Compiler<String, Context, String[]> get(Pattern[] patterns) {
+    var lexMatching = new Pipeline<>(new ExpressionMatcher(patterns));
+    var lexParsing = new Pipeline<>(new LexicalParsing(patterns));
+		
+		LexicalAnalyser lexical = new LexicalAnalyser(lexMatching, lexParsing);
+    
+    // Context lexicalContext = new Context();
+		// String[] tokens = lexical.process("1+23+3-98", lexicalContext);
 
-		String[] tokens = lexical.process("code1");
-		for (int i = 0; i < tokens.length; i++)
-			System.out.println(tokens[i]);
- 
-    var synparsing = new Pipeline<>(new Step3());
-		synparsing.addHandler(new Step4());
-		SyntaxAnalyser syntaxical = new SyntaxAnalyser(synparsing);
-
+//    var synparsing = new Pipeline<>(new Step3());
+//		synparsing.addHandler(new Step4());
+//		SyntaxAnalyser syntaxical = new SyntaxAnalyser(synparsing);
+//    compiler.addHandler();
+    return new DefaultCompiler(lexical);
   }
 }

@@ -20,7 +20,8 @@ public class SyntaxAnalyser extends CompilationStep<String[], Context, Float> {
 	 * @param matching: The matching pipeline.
 	 * @param parsing:  The parsing pipeline.
 	 */
-	public SyntaxAnalyser(Pipeline<String[], Context, Boolean> matching, Pipeline<String[], Context, Float> parsing) {
+	public SyntaxAnalyser(Pipeline<String[], Context, Boolean> matching,
+                        Pipeline<String[], Context, Float> parsing) {
 		super(matching, parsing);
 	}
 }
