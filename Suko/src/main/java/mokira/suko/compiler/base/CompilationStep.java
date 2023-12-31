@@ -4,7 +4,6 @@
  */
 package mokira.suko.compiler.base;
 
-
 /**
  * Compilation step will be extended or instancies
  * to be used like a step to build the compiler pipeline.
@@ -34,7 +33,7 @@ public class CompilationStep<I, Context, O> implements Handler<I, Context, O> {
 	 * @return O representing the output value after parsing.
 	 */
   @Override
-	public O process(I input, Context context) {
+	public O process(I input, Context context) throws Exception {
 		Boolean matched = true;
 		if (this.matchingPipeline != null)
 			matched = this.matchingPipeline.execute(input, context);

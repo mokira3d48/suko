@@ -21,6 +21,7 @@ public interface Handler<I, C, O> {
 	 * @param input
    * @param context
 	 * @return 
+   * @throws java.lang.Exception 
 	 */
-  public O process(I input, C context);
+  public O process(I input, C context) throws Exception;
 }

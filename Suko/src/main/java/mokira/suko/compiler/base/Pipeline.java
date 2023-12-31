@@ -41,8 +41,9 @@ public class Pipeline<I, C, O> {
 	 * @param input
    * @param co
 	 * @return
+   * @throws java.lang.Exception
 	 */
-	public O execute(I input, C co) {
+	public O execute(I input, C co) throws Exception {
 		return this.currentHandler.process(input, co);
 	}
 }
