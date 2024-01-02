@@ -1,4 +1,4 @@
-# Suko
+# Super Kalculator
 
 ## Spécifications non fonctionnelles
 Dans une expression, nous avons des opérations et des termes. Les différentes opérations possibles
