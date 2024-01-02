@@ -4,12 +4,17 @@
  */
 package mokira.suko.compiler;
 
+import mokira.suko.compiler.lexical.LexicalAnalyser;
+import mokira.suko.compiler.lexical.LexicalParsing;
+import mokira.suko.compiler.lexical.ExpressionMatcher;
 import java.util.regex.Pattern;
+import mokira.suko.compiler.atomic_analyser.MathObjectAnalyser;
 import mokira.suko.compiler.base.Context;
 import mokira.suko.compiler.base.Compiler;
 
 
 import mokira.suko.compiler.base.Pipeline;
+import mokira.suko.maths.MathObject;
 
 
 /**
@@ -23,18 +28,18 @@ public class DefaultCompilerBuilder {
    * @param patterns
 	 * @return A new instance of the compiler.
 	 */
-	public static Pipeline build(Pattern[] patterns) {
+	public static Pipeline build(MathObjectAnalyser[] patterns) {
     // Pipeline<String, Context, String[]> compiler = new Pipeline<>(new Preprocess())
     //        .addHandler(new ExpressionMatcher(patterns))
     //        .addHandler(new LexicalParsing(patterns));
 
     // return compiler;
     Pipeline<String, Context, Boolean> lexMatching = new Pipeline<>(new ExpressionMatcher(patterns));
-    Pipeline<String, Context, String[]> lexParsing = new Pipeline<>(new LexicalParsing(patterns));
+    Pipeline<String, Context, MathObject[]> lexParsing = new Pipeline<>(new LexicalParsing(patterns));
 
     LexicalAnalyser lexical = new LexicalAnalyser(lexMatching, lexParsing);
 
-    Pipeline<String, Context, String[]> compiler = new Pipeline<>(new Preprocess())
+    Pipeline<String, Context, MathObject[]> compiler = new Pipeline<>(new Preprocess())
             .addHandler(lexical);
     return compiler;
   }

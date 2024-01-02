@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko.compiler;
+package mokira.suko.maths;
 
 /**
  *
  * @author mokira3d48
  */
-public class LexicalError extends Exception {
+public class TermNotDefined extends Exception {
 
-  public LexicalError(String message) {
+  public TermNotDefined(String message) {
     super(message);
   }
-  
 }

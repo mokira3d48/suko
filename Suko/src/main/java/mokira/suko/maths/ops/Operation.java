@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko.ops;
+package mokira.suko.maths.ops;
 
-import mokira.suko.Numeric;
+import mokira.suko.maths.MathObject;
+import mokira.suko.maths.Numeric;
 
 
 /**
@@ -12,24 +13,15 @@ import mokira.suko.Numeric;
  *
  * @author mokira3d48
  */
-public abstract class Operation {
-  private static long idCounter = 0x0;
-  protected long id;
-  protected String name;
+public abstract class Operation extends MathObject {
   protected Numeric leftNumber;
   protected Numeric rightNumber;
   protected Numeric returned;
 
   {
-    this.id = idCounter; 
-    idCounter += 1;
     this.leftNumber = null;
     this.rightNumber = null;
     this.returned = null;
-  }
-
-  public String getName() {
-    return this.name;
   }
 
   public void setLeftNumber(Numeric leftNumber) {
@@ -44,6 +36,6 @@ public abstract class Operation {
     return this.returned;
   }
 
-  public abstract void perfom() throws Exception;
+  public abstract void perform() throws Exception;
 
 }

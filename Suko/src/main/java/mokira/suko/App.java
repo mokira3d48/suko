@@ -9,9 +9,20 @@ import javafx.stage.Stage;
 
 
 import mokira.suko.compiler.DefaultCompilerBuilder;
-import mokira.suko.compiler.LexicalError;
+import mokira.suko.compiler.atomic_analyser.AdditionAnalyser;
+import mokira.suko.compiler.atomic_analyser.DivisionAnalyser;
+import mokira.suko.compiler.atomic_analyser.MathObjectAnalyser;
+import mokira.suko.compiler.atomic_analyser.MultiplicationAnalyser;
+import mokira.suko.compiler.atomic_analyser.ScalarIntAnalyser;
+import mokira.suko.compiler.atomic_analyser.SubstractionAnalyser;
+import mokira.suko.compiler.lexical.LexicalError;
 import mokira.suko.compiler.base.Context;
 import mokira.suko.compiler.base.Pipeline;
+import mokira.suko.maths.MathObject;
+import mokira.suko.maths.ops.Addition;
+import mokira.suko.maths.ops.Division;
+import mokira.suko.maths.ops.Multiplication;
+import mokira.suko.maths.ops.Subtraction;
 
 
 /**
@@ -31,25 +42,26 @@ public class App extends Application {
 	}
 
 	public static void main(String[] args) {
-    Pattern[] patterns = new Pattern[4];
-    patterns[0] = Pattern.compile("[0-9]");
-    patterns[1] = Pattern.compile("\\+");
-    patterns[2] = Pattern.compile("-");
-    patterns[3] = Pattern.compile("\\*");
+    MathObjectAnalyser[] patterns = new MathObjectAnalyser[5];
+    patterns[0] = new ScalarIntAnalyser();
+    patterns[1] = new AdditionAnalyser();
+    patterns[2] = new SubstractionAnalyser();
+    patterns[3] = new MultiplicationAnalyser();
+    patterns[4] = new DivisionAnalyser();
     var defaultCompiler = (Pipeline) DefaultCompilerBuilder.build(patterns);
-    
-    String[] tokens = new String[0];
+
+    MathObject[] tokens = new MathObject[0];
 
     try{
       Context context = new Context();
-      tokens = (String[]) defaultCompiler.execute("23-3+2+12x8", context);
+      tokens = (MathObject[]) defaultCompiler.execute("23-3+2+12x8", context);
     } catch(LexicalError e) {
       System.err.println(e.getMessage());
     } catch(Exception e) {
       e.printStackTrace();
     }
 
-    for (String token: tokens)
+    for (MathObject token: tokens)
       System.out.print(token + " ");
 
     System.out.println(tokens.length);
