@@ -1,5 +1,11 @@
 # Super Kalculator
 
+<div align="center">
+
+![](./images/suko_screenshot.png)
+
+</div>
+
 ## Spécifications non fonctionnelles
 Dans une expression, nous avons des opérations et des termes. Les différentes opérations possibles
 que nous pouvons avoir sont des additions, multiplications, soustrations et divisions. Les termes
