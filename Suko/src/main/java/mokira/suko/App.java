@@ -21,11 +21,12 @@ public class App extends Application {
   public void start(Stage primaryStage) throws IOException {
     Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
     primaryStage.setTitle("Super Kalculator");
-    primaryStage.setScene(new Scene(root, 435, 560));
+    primaryStage.setScene(new Scene(root, 292, 450));
 
     // String iconPath = getClass().getResource("../").getPath()
     //        ;
     // primaryStage.getIcons().add(new Image(new File(iconPath).getAbsolutePath()));
+    primaryStage.setResizable(false);
     primaryStage.show();
   }
 
