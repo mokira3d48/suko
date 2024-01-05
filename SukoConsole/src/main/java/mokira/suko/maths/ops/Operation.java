@@ -24,18 +24,34 @@ public abstract class Operation extends MathObject {
     this.returned = null;
   }
 
+  /**
+   *
+   * @param leftNumber
+   */
   public void setLeftNumber(Numeric leftNumber) {
     this.leftNumber = leftNumber;
   }
 
+  /**
+   *
+   * @param rightNumber
+   */
   public void setRightNumber(Numeric rightNumber) {
     this.rightNumber = rightNumber;
   }
 
+  /**
+   *
+   * @return
+   */
   public Numeric getReturned() {
     return this.returned;
   }
 
+  /**
+   *
+   * @throws Exception
+   */
   public abstract void perform() throws Exception;
 
 }

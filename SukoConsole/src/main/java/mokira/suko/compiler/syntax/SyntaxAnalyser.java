@@ -6,7 +6,7 @@ package mokira.suko.compiler.syntax;
 
 import mokira.suko.compiler.base.CompilationStep;
 import mokira.suko.compiler.base.Pipeline;
-import mokira.suko.compiler.base.Context;
+import mokira.suko.compiler.Context;
 
 
 /**

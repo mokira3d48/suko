@@ -2,23 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko.compiler.atomic_analyser;
+package mokira.suko.compiler.analysers;
 
 import mokira.suko.maths.MathObject;
-import mokira.suko.maths.ops.Division;
+import mokira.suko.maths.ops.Multiplication;
 
 
 /**
  *
  * @author mokira3d48
  */
-public class DivisionAnalyser extends OperationAnalyser {
+public class MultiplicationAnalyser extends OperationAnalyser {
   
   /**
    *
    */
-  public DivisionAnalyser() {
-    this.patternString = "/";
+  public MultiplicationAnalyser() {
+    this.patternString = "\\*";
   }
 
   /**
@@ -28,7 +28,7 @@ public class DivisionAnalyser extends OperationAnalyser {
    */
   @Override
   public MathObject parse(String str) {
-    return new Division();
+    return new Multiplication();
   }
   
 }

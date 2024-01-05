@@ -4,7 +4,6 @@
  */
 package mokira.suko.compiler;
 
-import mokira.suko.compiler.base.Context;
 import mokira.suko.compiler.base.Handler;
 
 /**

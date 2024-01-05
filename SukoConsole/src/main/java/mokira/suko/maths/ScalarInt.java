@@ -10,7 +10,6 @@ package mokira.suko.maths;
  * @author mokira3d48
  */
 public class ScalarInt extends Numeric<Integer> {
-  protected String patternString = "[0-9]+";  // One or several
 
   public ScalarInt() {
     super();

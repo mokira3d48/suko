@@ -5,7 +5,7 @@
 package mokira.suko.compiler.lexical;
 
 import mokira.suko.compiler.base.CompilationStep;
-import mokira.suko.compiler.base.Context;
+import mokira.suko.compiler.Context;
 import mokira.suko.compiler.base.Pipeline;
 import mokira.suko.maths.MathObject;
 

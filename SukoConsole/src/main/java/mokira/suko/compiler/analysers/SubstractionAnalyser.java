@@ -2,22 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko.compiler.atomic_analyser;
+package mokira.suko.compiler.analysers;
 
 import mokira.suko.maths.MathObject;
-import mokira.suko.maths.ScalarInt;
+import mokira.suko.maths.ops.Subtraction;
 
 /**
  *
  * @author mokira3d48
  */
-public class ScalarIntAnalyser extends NumericAnalyser<Integer> {
-
+public class SubstractionAnalyser extends OperationAnalyser {
+  
   /**
-   * Default Constructor that define the pattern matching.
+   *
    */
-  public ScalarIntAnalyser() {
-    this.patternString = "[0-9]+";
+  public SubstractionAnalyser() {
+    this.patternString = "-";
   }
 
   /**
@@ -27,6 +27,7 @@ public class ScalarIntAnalyser extends NumericAnalyser<Integer> {
    */
   @Override
   public MathObject parse(String str) {
-    return new ScalarInt(Integer.valueOf(str));
+    return new Subtraction();
   }
+  
 }

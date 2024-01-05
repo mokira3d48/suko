@@ -4,11 +4,12 @@
  */
 package mokira.suko.compiler.lexical;
 
+import mokira.suko.compiler.exceptions.LexicalError;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import mokira.suko.compiler.atomic_analyser.MathObjectAnalyser;
+import mokira.suko.compiler.analysers.MathObjectAnalyser;
 
-import mokira.suko.compiler.base.Context;
+import mokira.suko.compiler.Context;
 import mokira.suko.compiler.base.Handler;
 
 

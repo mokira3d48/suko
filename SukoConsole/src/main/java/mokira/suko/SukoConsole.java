@@ -4,15 +4,15 @@
 
 package mokira.suko;
 
-import mokira.suko.compiler.DefaultCompilerBuilder;
-import mokira.suko.compiler.atomic_analyser.AdditionAnalyser;
-import mokira.suko.compiler.atomic_analyser.DivisionAnalyser;
-import mokira.suko.compiler.atomic_analyser.MathObjectAnalyser;
-import mokira.suko.compiler.atomic_analyser.MultiplicationAnalyser;
-import mokira.suko.compiler.atomic_analyser.ScalarIntAnalyser;
-import mokira.suko.compiler.atomic_analyser.SubstractionAnalyser;
-import mokira.suko.compiler.lexical.LexicalError;
-import mokira.suko.compiler.base.Context;
+import mokira.suko.compiler.DefaultInterpreterBuilder;
+import mokira.suko.compiler.analysers.AdditionAnalyser;
+import mokira.suko.compiler.analysers.DivisionAnalyser;
+import mokira.suko.compiler.analysers.MathObjectAnalyser;
+import mokira.suko.compiler.analysers.MultiplicationAnalyser;
+import mokira.suko.compiler.analysers.ScalarIntAnalyser;
+import mokira.suko.compiler.analysers.SubstractionAnalyser;
+import mokira.suko.compiler.exceptions.LexicalError;
+import mokira.suko.compiler.Context;
 import mokira.suko.compiler.base.Pipeline;
 import mokira.suko.maths.MathObject;
 import mokira.suko.maths.ops.Addition;
@@ -34,7 +34,7 @@ public class SukoConsole {
     patterns[2] = new SubstractionAnalyser();
     patterns[3] = new MultiplicationAnalyser();
     patterns[4] = new DivisionAnalyser();
-    var defaultCompiler = (Pipeline) DefaultCompilerBuilder.build(patterns);
+    var defaultCompiler = (Pipeline) DefaultInterpreterBuilder.build(patterns);
 
     MathObject[] tokens = new MathObject[0];
 
