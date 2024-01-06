@@ -14,5 +14,18 @@ import mokira.suko.maths.Variable;
 public abstract class Operation extends MathObject {
   protected Variable returned;
 
-  public abstract void eval() throws Exception;
+	/**
+	 * Retourn la valeur de returned
+	 * @return this.returned
+	 */
+	public Variable getReturned() {
+		return this.returned;
+	}
+
+	/**
+	 * Fontion abtraite destiner a realiser le calcul de l'operation 
+	 * @throws Exception
+	 */
+	public abstract void eval() throws Exception;
+
 }
