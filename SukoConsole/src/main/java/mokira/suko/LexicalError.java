@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko.compiler.handlers;
-
-import mokira.suko.compiler.Context;
-import mokira.suko.compiler.base.Handler;
-
+package mokira.suko;
 
 /**
  *
  * @author mokira3d48
  */
-public abstract class Parser<I, O> implements Handler<I, Context, O> {
+public class LexicalError extends MatchingError {
 
+  public LexicalError(String message) {
+    super(message);
+  }
 }

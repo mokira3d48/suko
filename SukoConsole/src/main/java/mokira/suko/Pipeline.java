@@ -2,23 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko.compiler.base;
+package mokira.suko;
 
 /**
  * Generic definition of pipeline class according the Pipeline design pattern
  *
  * @author mokira3d48
  * @param <I>
- * @param <C>
  * @param <O>
  */
-public class Pipeline<I, C, O> {
-	protected Handler<I, C, O> currentHandler;
+public class Pipeline<I, O> {
+	protected Handler<I, O> currentHandler;
 
 	/**
 	 * @param currentHandler: Represents the first handler will be executed in the pipeline.
 	 */
-	public Pipeline(Handler<I, C, O> currentHandler) {
+	public Pipeline(Handler<I, O> currentHandler) {
 		this.currentHandler = currentHandler;
 	}
 
@@ -30,8 +29,8 @@ public class Pipeline<I, C, O> {
 	 * @param newHandler
 	 * @return
 	 */
-	public <K> Pipeline<I, C, K> addHandler(Handler<O, C, K> newHandler) {
-		return new Pipeline<>((I inp, C co) -> newHandler.process(currentHandler.process(inp, co), co));
+	public <K> Pipeline<I, K> addHandler(Handler<O, K> newHandler) {
+		return new Pipeline<>((I inp) -> newHandler.process(currentHandler.process(inp)));
 	}
 
 	/**
@@ -39,12 +38,11 @@ public class Pipeline<I, C, O> {
 	 * added into the pipeline instance
 	 * 
 	 * @param input
-   * @param co
 	 * @return
    * @throws java.lang.Exception
 	 */
-	public O execute(I input, C co) throws Exception {
-		return this.currentHandler.process(input, co);
+	public O execute(I input) throws Exception {
+		return this.currentHandler.process(input);
 	}
 }
 

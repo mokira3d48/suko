@@ -2,22 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko.compiler.analysers;
+package mokira.suko;
 
+import java.util.List;
+import java.util.ArrayList;
 import mokira.suko.maths.MathObject;
 
 /**
  *
  * @author mokira3d48
  */
-class TreeCode {
-  protected MathObject[] leafs;
+public class LexicalAnalyser implements Handler<String, List<MathObject>> {
 
-  public TreeCode(MathObject[] leafs) {
-    this.leafs = leafs;
-  }
-  
-  public MathObject[] getLeafs() {
-    return this.leafs;
+  @Override
+  public List<MathObject> process(String input) throws Exception {
+    
   }
 }

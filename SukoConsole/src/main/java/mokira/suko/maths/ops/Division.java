@@ -6,13 +6,15 @@ package mokira.suko.maths.ops;
 
 import mokira.suko.maths.TermNotDefined;
 
+
 /**
  *
  * @author mokira3d48
  */
-public class Division extends Operation {
+public class Division extends BinaryOperation {
 
   public Division() {
+    super();
     this.tag = "-";
   }
 
@@ -21,8 +23,14 @@ public class Division extends Operation {
    * @throws TermNotDefined
    */
   @Override
-  public void perform() throws TermNotDefined {
-    if (this.leftNumber == null || this.rightNumber == null)
+  public void eval() throws TermNotDefined {
+    Double value1 = this.var1.getValue();
+    Double value2 = this.var2.getValue();
+
+    if (value1 == null || value2 == null)
       throw new TermNotDefined("Some terms is missing at operation ID: " + this.id);
+
+    Double value3 = value1 / value2;
+    this.returned.setValue(value3);
   }
 }

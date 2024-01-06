@@ -7,21 +7,36 @@ package mokira.suko.maths;
 /**
  *
  * @author mokira3d48
- * @param <T>
  */
-public abstract class Numeric<T> extends MathObject {
-  protected T value;
+public class Variable extends MathObject {
+  protected Double value;
   
-  protected Numeric() {
+  protected Variable() {
     this.value = null;
   }
-  
-  protected Numeric(T value) {
+
+  /**
+   *
+   * @param value
+   */
+  protected Variable(Double value) {
     this();
     this.value = value;
   }
-  
-  public T getValue() {
+
+  /**
+   *
+   * @return
+   */
+  public Double getValue() {
     return this.value;
+  }
+
+  /**
+   *
+   * @param value
+   */
+  public void setValue(Double value) {
+    this.value = value;
   }
 }

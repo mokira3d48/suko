@@ -4,15 +4,22 @@
  */
 package mokira.suko.maths.ops;
 
-import mokira.suko.maths.MathObject;
 import mokira.suko.maths.Variable;
+
 
 /**
  *
  * @author mokira3d48
  */
-public abstract class Operation extends MathObject {
-  protected Variable returned;
+public abstract class BinaryOperation extends Operation {
+  protected Variable var1;
+  protected Variable var2;
 
-  public abstract void eval() throws Exception;
+  public void setVar1(Variable var) {
+    this.var1 = var;
+  }
+
+  public void setVar2(Variable var) {
+    this.var2 = var;
+  }
 }
