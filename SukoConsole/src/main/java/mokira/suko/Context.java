@@ -18,23 +18,24 @@ public class Context {
     varList.put(var, value);
   }
 
-  public int getValue(String var) {
+  public double getValue(String var) {
+    System.out.println(var);
     Double objInt = varList.get(var);
-    return objInt.intValue();
+    return objInt.doubleValue();
   }
 
   public Context() {
     this.varList = new HashMap<>();
-    initialize();
+    // initialize();
   }
 
   //Values are hardcoded to keep the example simple
-  private void initialize() {
-    assign("a", 20);
-    assign("b", 40);
-    assign("c", 30);
-    assign("d", 10);
-  }
+//  private void initialize() {
+//    assign("a", 20);
+//    assign("b", 40);
+//    assign("c", 30);
+//    assign("d", 10);
+//  }
   
   @Override
   public String toString() {

@@ -4,7 +4,10 @@
  */
 package mokira.suko;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -13,28 +16,34 @@ import java.util.Stack;
  */
 public class Calculator {
   private String expression;
-  private HashMap operators;
+  private Map<String, Integer> operators;
+  private List<String> variableNames;
   private Context ctx;
-  
+
   public Calculator() {
     operators = new HashMap();
-    operators.put("+", "1");
-    operators.put("-", "1");
-    operators.put("/", "2");
-    operators.put("*", "2");
-    operators.put("(", "0");
+    variableNames = new ArrayList<>();
+    operators.put("+", 1);
+    operators.put("-", 1);
+    operators.put("/", 2);
+    operators.put("*", 2);
+    operators.put("(", 0);
   }
 
-    public void setContext(Context c) {
+  public void setContext(Context c) {
     ctx = c;
   }
 
   public void setExpression(String expr) {
     expression = expr;
   }
-  
+
   public String getExpression() {
     return expression;
+  }
+
+  public List<String> getVariableNames() {
+    return variableNames;
   }
 
   public double evaluate() {
@@ -66,87 +75,90 @@ public class Calculator {
 
   private Expression buildTree(String expr) {
     Stack s = new Stack();
+    String buffer = "";
 
     for (int i = 0; i < expr.length(); i++) {
       String currChar = expr.substring(i, i + 1);
 
-      if (isOperator(currChar) == false) {
-        Expression e = new TerminalExpression(currChar);
-        s.push(e);
+      if (!isOperator(currChar)) {
+        // Expression e = new TerminalExpression(currChar);
+        // s.push(e);
+        buffer += currChar;
       } else {
         Expression r = (Expression) s.pop();
         Expression l = (Expression) s.pop();
         Expression n = getNonTerminalExpression(currChar, l, r);
         s.push(n);
       }
-    }//for
+      
+      if (isVariableName(buffer)) {
+        Expression e = new TerminalExpression(buffer);
+        s.push(e);
+        buffer = "";
+      }
+    }
     return (Expression) s.pop();
   }
 
   private String infixToPostFix(String str) {
-    Stack s = new Stack();
+    Stack s = new Stack(); // Pile d'appel des operations
     String pfExpr = "";
     String tempStr = "";
 
     String expr = str.trim();
-    for (int i = 0; i < str.length(); i++) {
+    for (int i = 0; i < expr.length(); i++) {
 
+      // On recupere un caractere a chaque tour de boucle
       String currChar = str.substring(i, i + 1);
 
-      if ((isOperator(currChar) == false) && (!currChar.equals("("))
-          && (!currChar.equals(")"))) {
+      if (!isOperator(currChar) && (!currChar.equals("(")) && (!currChar.equals(")"))) {
         pfExpr = pfExpr + currChar;
-      }
-      if (currChar.equals("(")) {
+      } else if (currChar.equals("(")) {
         s.push(currChar);
-      }
-      //for ')' pop all stack contents until '('
-      if (currChar.equals(")")) {
+      } else if (currChar.equals(")")) {
+        // for ')' pop all stack contents until '('
         tempStr = (String) s.pop();
         while (!tempStr.equals("(")) {
           pfExpr = pfExpr + tempStr;
           tempStr = (String) s.pop();
         }
         tempStr = "";
-      }
-      //if the current character is an
-      // operator
-      if (isOperator(currChar)) {
-        if (s.isEmpty() == false) {
+      } else if (isOperator(currChar)) {
+        // if the current character is an operator
+        if (!s.isEmpty()) {
           tempStr = (String) s.pop();
-          String strVal1 = (String) operators.get(tempStr);
-          int val1 = Integer.valueOf(strVal1).intValue();
-          String strVal2 = (String) operators.get(currChar);
-          int val2 = Integer.valueOf(strVal2).intValue();
+          int val1 = operators.get(tempStr);
+          int val2 = operators.get(currChar);
 
           while ((val1 >= val2)) {
             pfExpr = pfExpr + tempStr;
             val1 = -100;
             if (s.isEmpty() == false) {
               tempStr = (String) s.pop();
-              strVal1 = (String) operators.get(tempStr);
-              val1 = new Integer(strVal1).intValue();
-
+              val1 = operators.get(tempStr);
             }
           }
           if ((val1 < val2) && (val1 != -100))
             s.push(tempStr);
         }
         s.push(currChar);
-      }//if
+      }
+    }
 
-    }// for
-    while (s.isEmpty() == false) {
+    while (!s.isEmpty()) {
       tempStr = (String) s.pop();
       pfExpr = pfExpr + tempStr;
     }
+    System.out.println(pfExpr);
     return pfExpr;
   }
 
   private boolean isOperator(String str) {
-    if ((str.equals("+")) || (str.equals("-")) || (str.equals("*"))
-        || (str.equals("/")))
-      return true;
-    return false;
+    return ((str.equals("+")) || (str.equals("-")) || (str.equals("*"))
+        || (str.equals("/")));
+  }
+  
+  private boolean isVariableName(String str) {
+    return variableNames.indexOf(str) != -1;
   }
 }
