@@ -110,6 +110,10 @@ public class Calculator {
 
       // On recupere un caractere a chaque tour de boucle
       String currChar = str.substring(i, i + 1);
+      
+      if (currChar.equals(" "))
+        // S'il s'agit du blank alors on continu
+        continue;
 
       if (!isOperator(currChar) && (!currChar.equals("(")) && (!currChar.equals(")"))) {
         pfExpr = pfExpr + currChar;

@@ -20,7 +20,7 @@ public class SukoConsole {
     Context ctx = new Context();
 
     // set the expression to evaluate
-    calc.setExpression("code+x2*x3-x4*x4+x5-x4*(x1+code)");
+    calc.setExpression("code + x2 * x3 - x4 * x4 + x5 - x4 * (x1 + code)");
     
     calc.getVariableNames().add("x1");
     calc.getVariableNames().add("x2");
