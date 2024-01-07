@@ -32,6 +32,10 @@ public class Calculator {
   public void setExpression(String expr) {
     expression = expr;
   }
+  
+  public String getExpression() {
+    return expression;
+  }
 
   public double evaluate() {
     //infix to Postfix
@@ -44,8 +48,7 @@ public class Calculator {
     return rootNode.evaluate(ctx);
   }
 
-  private NonTerminalExpression getNonTerminalExpression(String operation,
-      Expression l, Expression r) {
+  private NonTerminalExpression getNonTerminalExpression(String operation, Expression l, Expression r) {
     if (operation.trim().equals("+")) {
       return new AddExpression(l, r);
     }
@@ -55,7 +58,9 @@ public class Calculator {
     if (operation.trim().equals("*")) {
       return new MultiplyExpression(l, r);
     }
-
+    if (operation.trim().equals("/")) {
+      return new DivisionExpression(l, r);
+    }
     return null;
   }
 

@@ -5,26 +5,26 @@
 package mokira.suko;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author mokira3d48
  */
 public class Context {
-  private HashMap varList;
+  private Map<String, Double> varList;
 
-  public void assign(String var, int value) {
-    varList.put(var, new Integer(value));
+  public void assign(String var, double value) {
+    varList.put(var, value);
   }
 
   public int getValue(String var) {
-    System.out.println("VAR => " + var);
-    Integer objInt = (Integer) varList.get(var);
+    Double objInt = varList.get(var);
     return objInt.intValue();
   }
 
   public Context() {
-    this.varList = new HashMap();
+    this.varList = new HashMap<>();
     initialize();
   }
 
@@ -34,5 +34,14 @@ public class Context {
     assign("b", 40);
     assign("c", 30);
     assign("d", 10);
+  }
+  
+  @Override
+  public String toString() {
+    String str = "";
+    for (String varName: varList.keySet())
+      str += varName + " = " + varList.get(varName) + ";\n";
+
+    return str;
   }
 }
