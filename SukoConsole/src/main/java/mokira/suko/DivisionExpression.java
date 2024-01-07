@@ -8,9 +8,13 @@ package mokira.suko;
  *
  * @author mokira3d48
  */
-public class SyntaxError extends MatchingError {
+public class DivisionExpression extends NonTerminalExpression {
 
-  public SyntaxError(String message) {
-    super(message);
+  public double evaluate(Context c) {
+    return getLeftNode().evaluate(c) / getRightNode().evaluate(c);
+  }
+
+  public DivisionExpression(Expression l, Expression r) {
+    super(l, r);
   }
 }

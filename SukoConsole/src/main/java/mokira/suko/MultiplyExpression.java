@@ -8,9 +8,14 @@ package mokira.suko;
  *
  * @author mokira3d48
  */
-public class LexicalError extends MatchingError {
+public class MultiplyExpression extends NonTerminalExpression {
 
-  public LexicalError(String message) {
-    super(message);
+  public double evaluate(Context c) {
+    return getLeftNode().evaluate(c) * getRightNode().evaluate(c);
   }
+
+  public MultiplyExpression(Expression l, Expression r) {
+    super(l, r);
+  }
+
 }

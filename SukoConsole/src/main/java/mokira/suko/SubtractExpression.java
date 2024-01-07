@@ -8,8 +8,13 @@ package mokira.suko;
  *
  * @author mokira3d48
  */
-public class MatchingError extends Exception {
-  public MatchingError(String message) {
-    super(message);
+public class SubtractExpression extends NonTerminalExpression {
+
+  public double evaluate(Context c) {
+    return getLeftNode().evaluate(c) - getRightNode().evaluate(c);
+  }
+
+  public SubtractExpression(Expression l, Expression r) {
+    super(l, r);
   }
 }

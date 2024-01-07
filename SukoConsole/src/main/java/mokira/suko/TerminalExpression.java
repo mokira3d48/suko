@@ -8,9 +8,14 @@ package mokira.suko;
  *
  * @author mokira3d48
  */
-public class SemanticError extends MatchingError {
-  
-  public SemanticError(String message) {
-    super(message);
+public class TerminalExpression implements Expression {
+  private String var;
+
+  public TerminalExpression(String v) {
+    var = v;
+  }
+
+  public double evaluate(Context c) {
+    return c.getValue(var);
   }
 }
