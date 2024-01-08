@@ -106,10 +106,11 @@ public class Calculator {
     String tempStr = "";
 
     String expr = str.trim();
+
     for (int i = 0; i < expr.length(); i++) {
 
       // On recupere un caractere a chaque tour de boucle
-      String currChar = str.substring(i, i + 1);
+      String currChar = expr.substring(i, i + 1);
       
       if (currChar.equals(" "))
         // S'il s'agit du blank alors on continu

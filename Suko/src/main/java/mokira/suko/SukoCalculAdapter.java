@@ -22,7 +22,7 @@ public class SukoCalculAdapter implements SukoCalculator {
 
   private static List<String> getTerms(String expr) {
     List<String> termsFound = new ArrayList<>();
-    Pattern pattern = Pattern.compile("[0-9]+", Pattern.CASE_INSENSITIVE);
+    Pattern pattern = Pattern.compile("^-[0-9]+|[0-9]+", Pattern.CASE_INSENSITIVE);
     Matcher matcher = pattern.matcher(expr);
     matcher.results().forEach(e -> termsFound.add(expr.substring(e.start(), e.end())));
     return termsFound;
@@ -85,12 +85,14 @@ public class SukoCalculAdapter implements SukoCalculator {
     
     // Creation du context de calcule
     Context ctx = new Context();
-    
+    System.out.println("-------------VARIABLES LIST -------------------------");
     for (Map.Entry<String, String> entry : vars.entrySet()) {
       String varName = entry.getKey();
       Double value = Double.valueOf(entry.getValue());
+
       calc.getVariableNames().add(varName);
       ctx.assign(varName, value);
+      System.out.println(varName + " = " + value);
     }
     
     // Remplacer les valeurs par leur nom de variables respectives

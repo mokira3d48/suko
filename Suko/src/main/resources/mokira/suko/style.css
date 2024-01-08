@@ -1,6 +1,12 @@
+@font-face {
+    font-family: "digit";
+    src: url("digital-7.ttf");
+}
+
 * {
     -fx-text-fill: #fff;
 }
+
 
 .root {
     -fx-background-color: #000;
@@ -22,6 +28,7 @@
     -fx-background-radius: 0.15em;
     -fx-padding: 0.15em 0.15em 0 0;
     /*-fx-background-color: red;*/
+    -fx-font-family: "digit";
 }
 
 .button {
@@ -33,7 +40,7 @@
 }
 
 .button-equal {
-    -fx-pref-width: 16.2em;
+    -fx-pref-width: 16.4em;
 /*    -fx-alignment: center-right;
     -fx-text-alignment:right;
     -fx-font-size: 4em;
