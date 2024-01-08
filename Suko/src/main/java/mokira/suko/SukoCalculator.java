@@ -17,6 +17,6 @@ public interface SukoCalculator {
    * @param expr: L'expression sous forme de chaine.
    * @return Le résultat du calcul effectue.
    */
-  public Double calculate(String expr);
+  public Double calculate(String expr) throws Exception;
   
 }

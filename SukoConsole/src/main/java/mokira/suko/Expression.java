@@ -9,5 +9,5 @@ package mokira.suko;
  * @author mokira3d48
  */
 public interface Expression {
-  public double evaluate(Context c);
+  public double evaluate(Context c) throws Exception;
 }

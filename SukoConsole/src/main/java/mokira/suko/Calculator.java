@@ -46,7 +46,7 @@ public class Calculator {
     return variableNames;
   }
 
-  public double evaluate() {
+  public double evaluate() throws Exception {
     //infix to Postfix
     String pfExpr = infixToPostFix(expression);
 
@@ -109,7 +109,7 @@ public class Calculator {
     for (int i = 0; i < expr.length(); i++) {
 
       // On recupere un caractere a chaque tour de boucle
-      String currChar = str.substring(i, i + 1);
+      String currChar = expr.substring(i, i + 1);
       
       if (currChar.equals(" "))
         // S'il s'agit du blank alors on continu
@@ -153,7 +153,7 @@ public class Calculator {
       tempStr = (String) s.pop();
       pfExpr = pfExpr + tempStr;
     }
-    System.out.println(pfExpr);
+    // System.out.println(pfExpr);
     return pfExpr;
   }
 

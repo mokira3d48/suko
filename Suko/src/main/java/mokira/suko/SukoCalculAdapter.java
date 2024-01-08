@@ -69,8 +69,8 @@ public class SukoCalculAdapter implements SukoCalculator {
   }
 
   @Override
-  public Double calculate(String expr) {
-    System.out.println("Original expression: \t" + expr);
+  public Double calculate(String expr) throws Exception {
+    // System.out.println("Original expression: \t" + expr);
     // Recuperer les termes de l'expression
     List<String> terms = getTerms(expr);
     // Transformer les termes en varibles x1=v1, x2=v2, ... xn=vn
@@ -85,27 +85,27 @@ public class SukoCalculAdapter implements SukoCalculator {
     
     // Creation du context de calcule
     Context ctx = new Context();
-    System.out.println("-------------VARIABLES LIST -------------------------");
+    // System.out.println("-------------VARIABLES LIST -------------------------");
     for (Map.Entry<String, String> entry : vars.entrySet()) {
       String varName = entry.getKey();
       Double value = Double.valueOf(entry.getValue());
 
       calc.getVariableNames().add(varName);
       ctx.assign(varName, value);
-      System.out.println(varName + " = " + value);
+      // System.out.println(varName + " = " + value);
     }
     
     // Remplacer les valeurs par leur nom de variables respectives
     // dans l'expression originelle
     String exprMapped = mapValueToVar(expr, vars);
-    System.out.println("Mapped expression: \t" + exprMapped);
+    // System.out.println("Mapped expression: \t" + exprMapped);
 
     // Renseigner l'expression a evaluer
     calc.setExpression(exprMapped);
 
     //
     calc.setContext(ctx);
-
+    
     Double doubleResult = calc.evaluate();
     String longResult = "" + Math.round(doubleResult.doubleValue());
     return Double.valueOf(longResult);

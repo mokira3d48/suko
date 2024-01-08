@@ -9,9 +9,16 @@ package mokira.suko.calc;
  * @author mokira3d48
  */
 public class DivisionExpression extends NonTerminalExpression {
+  
+  @Override
+  public double evaluate(Context c) throws Exception {
+    double term1 = getLeftNode().evaluate(c);
+    double term2 = getRightNode().evaluate(c);
+    
+    if (term2 == 0.0)
+      throw new SemanticError("{" + term1 + " / 0} --> Division by zero detected.");
 
-  public double evaluate(Context c) {
-    return getLeftNode().evaluate(c) / getRightNode().evaluate(c);
+    return term1 / term2;
   }
 
   public DivisionExpression(Expression l, Expression r) {

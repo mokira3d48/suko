@@ -8,14 +8,9 @@ package mokira.suko.calc;
  *
  * @author mokira3d48
  */
-public class AddExpression extends NonTerminalExpression {
+public class SemanticError extends Exception {
 
-  @Override
-  public double evaluate(Context c) throws Exception{
-    return getLeftNode().evaluate(c) + getRightNode().evaluate(c);
-  }
-
-  public AddExpression(Expression l, Expression r) {
-    super(l, r);
+  public SemanticError(String message) {
+    super(message);
   }
 }

@@ -19,7 +19,7 @@ public class Context {
   }
 
   public double getValue(String var) {
-    System.out.println(var);
+    // System.out.println(var);
     Double objInt = varList.get(var);
     return objInt.doubleValue();
   }

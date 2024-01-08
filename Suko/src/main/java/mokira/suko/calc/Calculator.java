@@ -46,7 +46,7 @@ public class Calculator {
     return variableNames;
   }
 
-  public double evaluate() {
+  public double evaluate() throws Exception {
     //infix to Postfix
     String pfExpr = infixToPostFix(expression);
 
@@ -90,7 +90,7 @@ public class Calculator {
         Expression n = getNonTerminalExpression(currChar, l, r);
         s.push(n);
       }
-      
+
       if (isVariableName(buffer)) {
         Expression e = new TerminalExpression(buffer);
         s.push(e);
@@ -106,7 +106,6 @@ public class Calculator {
     String tempStr = "";
 
     String expr = str.trim();
-
     for (int i = 0; i < expr.length(); i++) {
 
       // On recupere un caractere a chaque tour de boucle
@@ -154,7 +153,7 @@ public class Calculator {
       tempStr = (String) s.pop();
       pfExpr = pfExpr + tempStr;
     }
-    System.out.println(pfExpr);
+    // System.out.println(pfExpr);
     return pfExpr;
   }
 

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import mokira.suko.calc.SemanticError;
 
 
 /**
@@ -26,6 +28,7 @@ public class SuperKalculatorController {
   
   private List<String> storedExpr;
   private boolean hasCalculated = false;
+  private boolean hasError = false;
   
   public SuperKalculatorController() {
     storedExpr = new ArrayList<>();
@@ -44,7 +47,7 @@ public class SuperKalculatorController {
   }
   
   private void enterNumber(String numberInput) {
-    if (this.hasCalculated)
+    if (this.hasCalculated || this.hasError)
       this.reset();
 
     String outputLabelText = outputLabel.getText();
@@ -69,13 +72,16 @@ public class SuperKalculatorController {
       storedExpr.clear();
       this.hasCalculated = false;
     }
+    
+    if (this.hasError)
+      reset();
 
     if (!outputLabel.getText().equals("0")) {
       storedExpr.add(outputLabel.getText());
       storedExpr.add(binaryOperatorString);
       outputLabel.setText("0");
     } else {
-      if (!storedExpr.isEmpty()) {
+      if (storedExpr.size() > 1) {
 //        String tmp = storedExpr.substring(0);
 //        storedExpr = tmp.substring(0, tmp.length() - 2) + "" + binaryOperatorString;
         storedExpr.set(storedExpr.size() - 1, binaryOperatorString);
@@ -97,12 +103,18 @@ public class SuperKalculatorController {
     inputLabel.setText("");
     storedExpr.clear();
     this.hasCalculated = false;
+    this.hasError = false;
     inputLabel.requestFocus();
   }
-  
+
   private void deleteCharacter() {
     if (this.hasCalculated)
       return;
+
+    if (this.hasError) {
+      outputLabel.setText("0");
+      this.hasError = false;
+    }
 
     if (Double.parseDouble(outputLabel.getText()) != 0) {
       outputLabel.setText(outputLabel.getText().substring(0, outputLabel.getText().length() - 1));
@@ -178,17 +190,41 @@ public class SuperKalculatorController {
       // L'expression ne doit pas etre vide ni remplit uniquement d'espace
       return;
     
+    if (storedExpr.size() == 1) {
+      this.hasCalculated = true;
+      this.outputLabel.setText("" + storedExpr.get(0));
+      return;
+    }
+
     storedExpr.add(this.outputLabel.getText());
     String finalExpression = joinStringSeq(storedExpr);
     inputLabel.setText(finalExpression);
     inputLabel.requestFocus();
     this.outputLabel.setText("Buzy...");
-
-    SukoCalculator calculator = new SukoCalculAdapter();
-    Double ret = calculator.calculate(finalExpression);
-    long longValue = ret.longValue();
-    this.outputLabel.setText("" + longValue);
-    this.hasCalculated = true;
+    Alert infoMessage = new Alert(Alert.AlertType.INFORMATION);
+    Alert erroMessage = new Alert(Alert.AlertType.ERROR);
+    
+    try {
+      SukoCalculator calculator = new SukoCalculAdapter();
+      Double ret = calculator.calculate(finalExpression);
+      long longValue = ret.longValue();
+      this.outputLabel.setText("" + longValue);
+      this.hasCalculated = true;
+    } catch (SemanticError e) {
+      this.hasError = true;
+      this.outputLabel.setText("SEM ERR");
+      infoMessage.setTitle("About calcul");
+      infoMessage.setHeaderText("SEMANTIC ERROR");
+      infoMessage.setContentText(e.getMessage());
+      infoMessage.show();
+    } catch (Exception e) {
+      this.hasError = true;
+      this.outputLabel.setText("UNK ERR");
+      erroMessage.setTitle("About calcul");
+      erroMessage.setHeaderText("UNKNOWN ERROR");
+      erroMessage.setContentText(e.getMessage());
+      erroMessage.show();
+    }
   }
 
   public void handleCalculationButtonClick(ActionEvent event) {

@@ -20,7 +20,7 @@ public class SukoConsole {
     Context ctx = new Context();
 
     // set the expression to evaluate
-    calc.setExpression("code + x2 * x3 - x4 * x4 + x4 * (x1 + code) + x6");
+    calc.setExpression("code + x2 * x3 - x4 * x4 + x4 * (x1 + code) + x5 / (x3 * x1)");
 
     calc.getVariableNames().add("x1");
     calc.getVariableNames().add("x2");
@@ -53,12 +53,14 @@ public class SukoConsole {
     // Display the result
     System.out.println(ctx);
     System.out.println(" Expression = " + calc.getExpression());
-    System.out.println(" Result = " + calc.evaluate());
-
-//    String expr = "x1x2x1x3";
-//		Pattern pattern = Pattern.compile("x1", Pattern.CASE_INSENSITIVE);
-//		Matcher matcher = pattern.matcher(expr);
-//		matcher.results().forEach(e -> System.out.println(e.));
+    
+    try {
+      System.out.println(" Result = " + calc.evaluate());
+    } catch (SemanticError e) {
+      System.out.println("SemanticError: \t" + e);
+    } catch (Exception e) {
+      System.out.println(e);
+    }
   }
 
 }

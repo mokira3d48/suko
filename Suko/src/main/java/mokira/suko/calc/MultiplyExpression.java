@@ -9,8 +9,9 @@ package mokira.suko.calc;
  * @author mokira3d48
  */
 public class MultiplyExpression extends NonTerminalExpression {
-
-  public double evaluate(Context c) {
+  
+  @Override
+  public double evaluate(Context c) throws Exception {
     return getLeftNode().evaluate(c) * getRightNode().evaluate(c);
   }
 
