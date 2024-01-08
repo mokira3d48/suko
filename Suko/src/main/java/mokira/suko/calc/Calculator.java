@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko;
+package mokira.suko.calc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,7 +90,7 @@ public class Calculator {
         Expression n = getNonTerminalExpression(currChar, l, r);
         s.push(n);
       }
-
+      
       if (isVariableName(buffer)) {
         Expression e = new TerminalExpression(buffer);
         s.push(e);

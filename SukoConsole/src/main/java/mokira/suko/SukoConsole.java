@@ -5,8 +5,8 @@
 
 package mokira.suko;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
 
 /**
  *
@@ -20,13 +20,14 @@ public class SukoConsole {
     Context ctx = new Context();
 
     // set the expression to evaluate
-    calc.setExpression("code + x2 * x3 - x4 * x4 + x5 - x4 * (x1 + code)");
-    
+    calc.setExpression("code + x2 * x3 - x4 * x4 + x4 * (x1 + code) + x6");
+
     calc.getVariableNames().add("x1");
     calc.getVariableNames().add("x2");
     calc.getVariableNames().add("x3");
     calc.getVariableNames().add("x4");
     calc.getVariableNames().add("x5");
+    calc.getVariableNames().add("x6");
     calc.getVariableNames().add("code");
 
     ctx.assign("x1", 0);
@@ -35,6 +36,7 @@ public class SukoConsole {
     ctx.assign("x4", 65);
     ctx.assign("x5", 32);
     ctx.assign("code", 12);
+    ctx.assign("x6", 10);
 
 //    calc.setExpression("a+b*c-d*d+e-d*(a+c)");
 //    
@@ -52,7 +54,7 @@ public class SukoConsole {
     System.out.println(ctx);
     System.out.println(" Expression = " + calc.getExpression());
     System.out.println(" Result = " + calc.evaluate());
-    
+
 //    String expr = "x1x2x1x3";
 //		Pattern pattern = Pattern.compile("x1", Pattern.CASE_INSENSITIVE);
 //		Matcher matcher = pattern.matcher(expr);
