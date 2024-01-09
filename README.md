@@ -13,22 +13,17 @@ ne sont uniquement que des nombres entiers. Donc, il n'y aura aucune implémenta
 des nombres réels. Vooici un exemple d'expression :
 
 $$
-1200 + 23 - 320 / 4 * 2
+97 \times 985 + 109 - 229
 $$
 
 L'expression à calculer sera représentée sous forme arborescence, dans un premier temps. C'est ce
 arbre de calcul qui sera évalué pour obtenir le résultat final. Danc, dans ce arbre de calcul,
 les branches représentent les termes et les noeuds représentent les opérations.
 
-```
-					  -
-				 /     \
-        +        /
-      /   \    /   \
-   1200   23 320     *
-    /       \/     /   \
-                  4     2
-                 /       \
-```
+<div align="center">
+
+![](./images/tree_calculus.png)
+
+</div>
 
 ## Spécifications fonctionnelles
