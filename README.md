@@ -22,7 +22,7 @@ les branches représentent les termes et les noeuds représentent les opération
 
 <div align="center">
 
-![](./images/tree_calculus.png)
+<img src="./images/tree_calculus.png" width="60%" height="60%"/>
 
 </div>
 
