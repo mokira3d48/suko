@@ -1,6 +1,6 @@
 package mokira.suko;
 
-import java.io.File;
+// import java.io.File;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import javafx.scene.image.Image;
+// import javafx.scene.image.Image;
 
 /**
  * JavaFX App
@@ -19,7 +19,7 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("primary.fxml"));
     primaryStage.setTitle("Super Kalculator");
     primaryStage.setScene(new Scene(root, 292, 450));
 

@@ -59,7 +59,7 @@ public class SukoCalculAdapter implements SukoCalculator {
 
     return varNames;
   }
-  
+
   private String mapValueToVar(String expr, Map<String, String> vars) {
     String exprResult = expr;
     for (Map.Entry<String, String> entry : vars.entrySet()) {
