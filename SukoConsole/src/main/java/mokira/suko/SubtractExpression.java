@@ -10,12 +10,16 @@ package mokira.suko;
  */
 public class SubtractExpression extends NonTerminalExpression {
   
+  public SubtractExpression() {
+
+  }
+ 
+  public SubtractExpression(Expression l, Expression r) {
+    super(l, r);
+  }
+
   @Override
   public double evaluate(Context c) throws Exception {
     return getLeftNode().evaluate(c) - getRightNode().evaluate(c);
-  }
-
-  public SubtractExpression(Expression l, Expression r) {
-    super(l, r);
   }
 }

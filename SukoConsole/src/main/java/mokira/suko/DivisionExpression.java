@@ -9,7 +9,15 @@ package mokira.suko;
  * @author mokira3d48
  */
 public class DivisionExpression extends NonTerminalExpression {
-  
+
+  public DivisionExpression() {
+
+  }
+
+  public DivisionExpression(Expression l, Expression r) {
+    super(l, r);
+  }
+
   @Override
   public double evaluate(Context c) throws Exception {
     double term1 = getLeftNode().evaluate(c);
@@ -19,9 +27,5 @@ public class DivisionExpression extends NonTerminalExpression {
       throw new SemanticError("{" + term1 + " / 0} --> Division by zero detected.");
 
     return term1 / term2;
-  }
-
-  public DivisionExpression(Expression l, Expression r) {
-    super(l, r);
   }
 }

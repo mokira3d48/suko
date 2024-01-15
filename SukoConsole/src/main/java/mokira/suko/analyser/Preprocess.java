@@ -19,11 +19,6 @@ public class Preprocess implements Handler<String, String>{
 
   public Preprocess(Map<String, Integer> ops) {
     this.operators = ops;
-    // operators.put("+", 1);
-    // operators.put("-", 1);
-    // operators.put("/", 2);
-    // operators.put("*", 2);
-    // operators.put("(", 0);
   }
 
   @Override
@@ -85,7 +80,12 @@ public class Preprocess implements Handler<String, String>{
   }
 
   private boolean isOperator(String str) {
-    return ((str.equals("+")) || (str.equals("-")) || (str.equals("*"))
-        || (str.equals("/")));
+    return !(this.operators
+            .keySet()
+            .stream()
+            .filter(op -> op.equals(str))
+            .toList()
+            .isEmpty());
+
   }
 }

@@ -9,13 +9,18 @@ package mokira.suko;
  * @author mokira3d48
  */
 public class AddExpression extends NonTerminalExpression {
-
-  @Override
-  public double evaluate(Context c) throws Exception{
-    return getLeftNode().evaluate(c) + getRightNode().evaluate(c);
+  
+  public AddExpression() {
+    
   }
 
   public AddExpression(Expression l, Expression r) {
     super(l, r);
   }
+  
+  @Override
+  public double evaluate(Context c) throws Exception{
+    return getLeftNode().evaluate(c) + getRightNode().evaluate(c);
+  }
+
 }

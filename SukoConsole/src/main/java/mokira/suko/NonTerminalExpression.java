@@ -12,6 +12,10 @@ public abstract class NonTerminalExpression implements Expression {
   private Expression leftNode;
 
   private Expression rightNode;
+  
+  public NonTerminalExpression() {
+
+  }
 
   public NonTerminalExpression(Expression l, Expression r) {
     setLeftNode(l);
@@ -33,4 +37,5 @@ public abstract class NonTerminalExpression implements Expression {
   public Expression getRightNode() {
     return rightNode;
   }
+
 }

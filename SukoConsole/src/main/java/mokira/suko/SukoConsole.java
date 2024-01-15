@@ -60,7 +60,8 @@ public class SukoConsole {
     } catch (SemanticError e) {
       System.out.println("SemanticError: \t" + e);
     } catch (Exception e) {
-      System.out.println(e);
+      // System.out.println(e);
+      e.printStackTrace();
     }
   }
 
