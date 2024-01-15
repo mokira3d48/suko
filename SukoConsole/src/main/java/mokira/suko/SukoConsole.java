@@ -20,7 +20,7 @@ public class SukoConsole {
     Context ctx = new Context();
 
     // set the expression to evaluate
-    calc.setExpression("code + x2 * x3 - x4 * x4 + x4 * (x1 + code) + x5 / (x3 * x1)");
+    calc.setExpression("code + x2 * x3 - x4 * x4 + x4 * (x1 + code) + x5 / (x3 * x2)");
 
     calc.getVariableNames().add("x1");
     calc.getVariableNames().add("x2");
@@ -53,8 +53,9 @@ public class SukoConsole {
     // Display the result
     System.out.println(ctx);
     System.out.println(" Expression = " + calc.getExpression());
-    
+
     try {
+      calc.initAnalyser();
       System.out.println(" Result = " + calc.evaluate());
     } catch (SemanticError e) {
       System.out.println("SemanticError: \t" + e);

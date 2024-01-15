@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import mokira.suko.analyser.Pipeline;
+import mokira.suko.analyser.Preprocess;
+import mokira.suko.analyser.TreeBuilder;
 
 /**
  *
@@ -19,6 +22,7 @@ public class Calculator {
   private Map<String, Integer> operators;
   private List<String> variableNames;
   private Context ctx;
+  private Pipeline<String, Expression> analyser;
 
   public Calculator() {
     operators = new HashMap();
@@ -28,6 +32,9 @@ public class Calculator {
     operators.put("/", 2);
     operators.put("*", 2);
     operators.put("(", 0);
+    
+    
+    // this.analyser = new Pipeline<>();
   }
 
   public void setContext(Context c) {
@@ -45,13 +52,20 @@ public class Calculator {
   public List<String> getVariableNames() {
     return variableNames;
   }
+  
+  public void initAnalyser() {
+    // on initialise l'analyseur
+    this.analyser = new Pipeline<>(new Preprocess(operators))
+            .addHandler(new TreeBuilder(operators, variableNames));
+  }
 
   public double evaluate() throws Exception {
     //infix to Postfix
-    String pfExpr = infixToPostFix(expression);
+    // String pfExpr = infixToPostFix(expression);
 
     //build the Binary Tree
-    Expression rootNode = buildTree(pfExpr);
+    // Expression rootNode = buildTree(pfExpr);
+    Expression rootNode = this.analyser.execute(expression);
 
     //Evaluate the tree
     return rootNode.evaluate(ctx);
