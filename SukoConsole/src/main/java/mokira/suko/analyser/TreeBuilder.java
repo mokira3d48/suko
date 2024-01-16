@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import mokira.suko.interpreter.AddExpression;
 import mokira.suko.Context;
 import mokira.suko.interpreter.DivisionExpression;
@@ -103,18 +104,17 @@ public class TreeBuilder implements Handler<String, Context, Expression> {
             .keySet()
             .stream()
             .filter(op -> op.equals(str))
-            .toList()
+            .collect(Collectors.toList())
             .isEmpty());
 
   }
 
   private boolean isVariableName(String str, Context context) {
-    // return this.variableNames.indexOf(str) != -1;
     return !(context
             .getVarNames()
             .stream()
             .filter(varn -> varn.equals(str))
-            .toList()
+            .collect(Collectors.toList())
             .isEmpty());
   }
 }

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import java.util.stream.Collectors;
 import mokira.suko.Context;
 
 /**
@@ -85,7 +86,7 @@ public class Preprocess implements Handler<String, Context, String>{
             .keySet()
             .stream()
             .filter(op -> op.equals(str))
-            .toList()
+            .collect(Collectors.toList())
             .isEmpty());
 
   }
