@@ -12,6 +12,7 @@ import java.util.Stack;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import mokira.suko.AddExpression;
+import mokira.suko.Context;
 import mokira.suko.DivisionExpression;
 import mokira.suko.Expression;
 import mokira.suko.MultiplyExpression;
@@ -23,17 +24,22 @@ import mokira.suko.TerminalExpression;
  *
  * @author mokira3d48
  */
-public class TreeBuilder implements Handler<String, Expression> {
+public class TreeBuilder implements Handler<String, Context, Expression> {
   private Map<String, BiFunction<Expression, Expression, NonTerminalExpression>> operators;
   private List<String> variableNames;
 
-  public TreeBuilder(Map<String, BiFunction<Expression, Expression, NonTerminalExpression>> ops, List<String> vars) {
+  public TreeBuilder(Map<String, BiFunction<Expression, Expression, NonTerminalExpression>> ops) {
     this.operators = ops;
-    this.variableNames = vars;
+    this.variableNames = new ArrayList<>();
+  }
+  
+  public void setVariableNames(List<String> vars) {
+    this.variableNames.clear();
+    this.variableNames.addAll(vars);
   }
 
   @Override
-  public Expression process(String input) throws Exception {
+  public Expression process(String input, Context context) throws Exception {
     Stack s = new Stack();
     String buffer = "";
 
@@ -51,7 +57,7 @@ public class TreeBuilder implements Handler<String, Expression> {
         s.push(n);
       }
 
-      if (isVariableName(buffer)) {
+      if (isVariableName(buffer, context)) {
         Expression e = new TerminalExpression(buffer);
         s.push(e);
         buffer = "";
@@ -84,7 +90,8 @@ public class TreeBuilder implements Handler<String, Expression> {
         return null;
 
       String firstOpStr = opFound.get(0);
-      BiFunction<Expression, Expression, NonTerminalExpression> getInstance = this.operators.get(firstOpStr);
+      BiFunction<Expression, Expression, NonTerminalExpression> getInstance;
+      getInstance = this.operators.get(firstOpStr);
       NonTerminalExpression returned = getInstance.apply(l, r);
 
 //      System.out.println(opString + " - " + returned.getClass().getName());
@@ -101,7 +108,13 @@ public class TreeBuilder implements Handler<String, Expression> {
 
   }
 
-  private boolean isVariableName(String str) {
-    return this.variableNames.indexOf(str) != -1;
+  private boolean isVariableName(String str, Context context) {
+    // return this.variableNames.indexOf(str) != -1;
+    return !(context
+            .getVarNames()
+            .stream()
+            .filter(varn -> varn.equals(str))
+            .toList()
+            .isEmpty());
   }
 }

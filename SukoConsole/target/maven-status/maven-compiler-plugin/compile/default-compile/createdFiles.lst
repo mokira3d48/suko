@@ -1,5 +1,6 @@
 mokira/suko/Expression.class
 mokira/suko/analyser/Handler.class
+mokira/suko/CalculatorBuilder.class
 mokira/suko/SukoConsole.class
 mokira/suko/AddExpression.class
 mokira/suko/SemanticError.class
@@ -11,5 +12,7 @@ mokira/suko/analyser/TreeBuilder.class
 mokira/suko/TerminalExpression.class
 mokira/suko/SubtractExpression.class
 mokira/suko/Context.class
+mokira/suko/Builder.class
 mokira/suko/MultiplyExpression.class
+mokira/suko/Director.class
 mokira/suko/analyser/Preprocess.class

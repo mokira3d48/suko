@@ -9,12 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import mokira.suko.Context;
 
 /**
  *
  * @author mokira3d48
  */
-public class Preprocess implements Handler<String, String>{
+public class Preprocess implements Handler<String, Context, String>{
   private Map<String, Integer> operators;
 
   public Preprocess(Map<String, Integer> ops) {
@@ -22,7 +23,7 @@ public class Preprocess implements Handler<String, String>{
   }
 
   @Override
-  public String process(String input) throws Exception {
+  public String process(String input, Context context) throws Exception {
     Stack s = new Stack(); // Pile d'appel des operations
     String pfExpr = "";
     String tempStr = "";

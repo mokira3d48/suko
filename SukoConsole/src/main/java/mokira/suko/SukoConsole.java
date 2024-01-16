@@ -15,20 +15,17 @@ package mokira.suko;
 public class SukoConsole {
 
   public static void main(String[] args) {
-    Calculator calc = new Calculator();
+    // Buildong of the calculator
+    Builder<Calculator> b = new CalculatorBuilder();
+    Director director = new Director(b);
+    director.makeBuild(); 
+    Calculator calc = b.getResult();
+
     // instantiate the context
     Context ctx = new Context();
 
     // set the expression to evaluate
     calc.setExpression("code + x2 * x3 - x4 * x4 + x4 * (x1 + code) + x5 / (x3 * x2)");
-
-    calc.getVariableNames().add("x1");
-    calc.getVariableNames().add("x2");
-    calc.getVariableNames().add("x3");
-    calc.getVariableNames().add("x4");
-    calc.getVariableNames().add("x5");
-    calc.getVariableNames().add("x6");
-    calc.getVariableNames().add("code");
 
     ctx.assign("x1", 0);
     ctx.assign("x2", 12);
@@ -55,7 +52,6 @@ public class SukoConsole {
     System.out.println(" Expression = " + calc.getExpression());
 
     try {
-      calc.initAnalyser();
       System.out.println(" Result = " + calc.evaluate());
     } catch (SemanticError e) {
       System.out.println("SemanticError: \t" + e);

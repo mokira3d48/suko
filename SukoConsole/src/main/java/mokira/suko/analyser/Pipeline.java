@@ -13,13 +13,13 @@ import mokira.suko.analyser.Handler;
  * @param <I>
  * @param <O>
  */
-public class Pipeline<I, O> {
-	protected Handler<I, O> currentHandler;
+public class Pipeline<I, C, O> {
+	protected Handler<I, C, O> currentHandler;
 
 	/**
 	 * @param currentHandler: Represents the first handler will be executed in the pipeline.
 	 */
-	public Pipeline(Handler<I, O> currentHandler) {
+	public Pipeline(Handler<I, C, O> currentHandler) {
 		this.currentHandler = currentHandler;
 	}
 
@@ -31,8 +31,8 @@ public class Pipeline<I, O> {
 	 * @param newHandler
 	 * @return
 	 */
-	public <K> Pipeline<I, K> addHandler(Handler<O, K> newHandler) {
-		return new Pipeline<>((I inp) -> newHandler.process(currentHandler.process(inp)));
+	public <K> Pipeline<I, C, K> addHandler(Handler<O, C, K> newHandler) {
+		return new Pipeline<>((I inp, C con) -> newHandler.process(currentHandler.process(inp, con), con));
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class Pipeline<I, O> {
 	 * @return
    * @throws java.lang.Exception
 	 */
-	public O execute(I input) throws Exception {
-		return this.currentHandler.process(input);
+	public O execute(I input, C context) throws Exception {
+		return this.currentHandler.process(input, context);
 	}
 }

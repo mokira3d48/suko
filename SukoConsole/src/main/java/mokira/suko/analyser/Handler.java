@@ -11,7 +11,7 @@ package mokira.suko.analyser;
  * @param <O>
  */
 @FunctionalInterface
-public interface Handler<I, O> {
+public interface Handler<I, C, O> {
 
 	/**
 	 * Process method must be implemented by extension
@@ -21,5 +21,5 @@ public interface Handler<I, O> {
 	 * @return 
    * @throws java.lang.Exception 
 	 */
-  public O process(I input) throws Exception;
+  public O process(I input, C context) throws Exception;
 }
