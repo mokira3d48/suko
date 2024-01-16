@@ -11,14 +11,14 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import mokira.suko.AddExpression;
+import mokira.suko.interpreter.AddExpression;
 import mokira.suko.Context;
-import mokira.suko.DivisionExpression;
-import mokira.suko.Expression;
-import mokira.suko.MultiplyExpression;
-import mokira.suko.NonTerminalExpression;
-import mokira.suko.SubtractExpression;
-import mokira.suko.TerminalExpression;
+import mokira.suko.interpreter.DivisionExpression;
+import mokira.suko.interpreter.Expression;
+import mokira.suko.interpreter.MultiplyExpression;
+import mokira.suko.interpreter.NonTerminalExpression;
+import mokira.suko.interpreter.SubtractExpression;
+import mokira.suko.interpreter.TerminalExpression;
 
 /**
  *

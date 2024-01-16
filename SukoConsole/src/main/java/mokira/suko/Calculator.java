@@ -4,6 +4,7 @@
  */
 package mokira.suko;
 
+import mokira.suko.interpreter.Expression;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

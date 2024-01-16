@@ -5,8 +5,8 @@
 
 package mokira.suko;
 
-//import java.util.regex.Matcher;
-//import java.util.regex.Pattern;
+import mokira.suko.interpreter.SemanticError;
+
 
 /**
  *
