@@ -2,23 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko.analyser;
+package mokira.suko.calc.analyser;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import java.util.function.BiFunction;
-import java.util.function.Function;
-import mokira.suko.interpreter.AddExpression;
-import mokira.suko.Context;
-import mokira.suko.interpreter.DivisionExpression;
-import mokira.suko.interpreter.Expression;
-import mokira.suko.interpreter.MultiplyExpression;
-import mokira.suko.interpreter.NonTerminalExpression;
-import mokira.suko.interpreter.SubtractExpression;
-import mokira.suko.interpreter.TerminalExpression;
+import java.util.stream.Collectors;
+
+import mokira.suko.calc.Context;
+import mokira.suko.calc.interpreter.Expression;
+import mokira.suko.calc.interpreter.NonTerminalExpression;
+import mokira.suko.calc.interpreter.TerminalExpression;
 
 /**
  *
@@ -84,7 +80,7 @@ public class TreeBuilder implements Handler<String, Context, Expression> {
             .keySet()
             .stream()
             .filter(op -> op.equals(opString))
-            .toList();
+            .collect(Collectors.toList());
       
       if (opFound.isEmpty())
         return null;
@@ -103,18 +99,17 @@ public class TreeBuilder implements Handler<String, Context, Expression> {
             .keySet()
             .stream()
             .filter(op -> op.equals(str))
-            .toList()
+            .collect(Collectors.toList())
             .isEmpty());
 
   }
 
   private boolean isVariableName(String str, Context context) {
-    // return this.variableNames.indexOf(str) != -1;
     return !(context
             .getVarNames()
             .stream()
             .filter(varn -> varn.equals(str))
-            .toList()
+            .collect(Collectors.toList())
             .isEmpty());
   }
 }

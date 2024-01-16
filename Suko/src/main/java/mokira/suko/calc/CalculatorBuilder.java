@@ -2,20 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko;
+package mokira.suko.calc;
 
-import mokira.suko.interpreter.SubtractExpression;
-import mokira.suko.interpreter.NonTerminalExpression;
-import mokira.suko.interpreter.MultiplyExpression;
-import mokira.suko.interpreter.Expression;
-import mokira.suko.interpreter.DivisionExpression;
-import mokira.suko.interpreter.AddExpression;
+import mokira.suko.calc.interpreter.SubtractExpression;
+import mokira.suko.calc.interpreter.NonTerminalExpression;
+import mokira.suko.calc.interpreter.MultiplyExpression;
+import mokira.suko.calc.interpreter.Expression;
+import mokira.suko.calc.interpreter.DivisionExpression;
+import mokira.suko.calc.interpreter.AddExpression;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
-import mokira.suko.analyser.Pipeline;
-import mokira.suko.analyser.Preprocess;
-import mokira.suko.analyser.TreeBuilder;
+import mokira.suko.calc.analyser.Pipeline;
+import mokira.suko.calc.analyser.Preprocess;
+import mokira.suko.calc.analyser.TreeBuilder;
 
 /**
  *

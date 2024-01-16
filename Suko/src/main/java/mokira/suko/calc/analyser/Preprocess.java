@@ -2,14 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko.analyser;
+package mokira.suko.calc.analyser;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Stack;
-import mokira.suko.Context;
+import mokira.suko.calc.Context;
+import java.util.stream.Collectors;
+
 
 /**
  *
@@ -85,7 +84,7 @@ public class Preprocess implements Handler<String, Context, String>{
             .keySet()
             .stream()
             .filter(op -> op.equals(str))
-            .toList()
+            .collect(Collectors.toList())
             .isEmpty());
 
   }

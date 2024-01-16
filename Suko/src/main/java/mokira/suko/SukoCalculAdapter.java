@@ -10,8 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import mokira.suko.calc.Builder;
 import mokira.suko.calc.Calculator;
+import mokira.suko.calc.CalculatorBuilder;
 import mokira.suko.calc.Context;
+import mokira.suko.calc.Director;
 
 
 /**
@@ -19,6 +22,15 @@ import mokira.suko.calc.Context;
  * @author mokira3d48
  */
 public class SukoCalculAdapter implements SukoCalculator {
+  private Calculator calculator;
+  
+  public SukoCalculAdapter() {
+    // Buildong of the calculator
+    Builder<Calculator> b = new CalculatorBuilder();
+    Director director = new Director(b);
+    director.makeBuild(); 
+    this.calculator = b.getResult();
+  }
 
   private static List<String> getTerms(String expr) {
     List<String> termsFound = new ArrayList<>();
@@ -76,13 +88,6 @@ public class SukoCalculAdapter implements SukoCalculator {
     // Transformer les termes en varibles x1=v1, x2=v2, ... xn=vn
     Map<String, String> vars = transformTerm2Var(terms);
     
-    // Definir une instance du programme de calculatrice
-    Calculator calc = new Calculator();
-    
-    // Enregistrement des variables
-    // for (String varName: varNames)
-    //  calc.getVariableNames().add(varName);
-    
     // Creation du context de calcule
     Context ctx = new Context();
     // System.out.println("-------------VARIABLES LIST -------------------------");
@@ -90,7 +95,6 @@ public class SukoCalculAdapter implements SukoCalculator {
       String varName = entry.getKey();
       Double value = Double.valueOf(entry.getValue());
 
-      calc.getVariableNames().add(varName);
       ctx.assign(varName, value);
       // System.out.println(varName + " = " + value);
     }
@@ -101,12 +105,12 @@ public class SukoCalculAdapter implements SukoCalculator {
     // System.out.println("Mapped expression: \t" + exprMapped);
 
     // Renseigner l'expression a evaluer
-    calc.setExpression(exprMapped);
+    this.calculator.setExpression(exprMapped);
 
     //
-    calc.setContext(ctx);
-    
-    Double doubleResult = calc.evaluate();
+    this.calculator.setContext(ctx);
+
+    Double doubleResult = this.calculator.evaluate();
     String longResult = "" + Math.round(doubleResult.doubleValue());
     return Double.valueOf(longResult);
   }

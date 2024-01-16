@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko.analyser;
+package mokira.suko.calc.analyser;
 
-import mokira.suko.analyser.Handler;
+import mokira.suko.calc.analyser.Handler;
 
 /**
  * Generic definition of pipeline class according the Pipeline design pattern

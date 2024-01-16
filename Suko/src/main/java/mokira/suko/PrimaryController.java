@@ -12,7 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
-import mokira.suko.calc.SemanticError;
+import mokira.suko.calc.interpreter.SemanticError;
 
 
 /**
@@ -29,9 +29,11 @@ public class PrimaryController {
   private List<String> storedExpr;
   private boolean hasCalculated = false;
   private boolean hasError = false;
+  private SukoCalculator calculator;
 
   public PrimaryController() {
     storedExpr = new ArrayList<>();
+    calculator = new SukoCalculAdapter();
   }
 
   private String joinStringSeq(List<String> strings) {
@@ -208,7 +210,6 @@ public class PrimaryController {
     Alert erroMessage = new Alert(Alert.AlertType.ERROR);
 
     try {
-      SukoCalculator calculator = new SukoCalculAdapter();
       Double ret = calculator.calculate(finalExpression);
       long longValue = ret.longValue();
       this.outputLabel.setText("" + longValue);
