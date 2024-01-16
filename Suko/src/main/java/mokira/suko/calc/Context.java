@@ -2,46 +2,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mokira.suko.calc;
+package mokira.suko;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
  * @author mokira3d48
  */
-public class Context {
-  private Map<String, Double> varList;
+public class Context extends HashMap<String, Double> {
+  
+  public Context() {
+    super();
+  }
 
   public void assign(String var, double value) {
-    varList.put(var, value);
+    this.put(var, value);
   }
 
   public double getValue(String var) {
     // System.out.println(var);
-    Double objInt = varList.get(var);
-    return objInt.doubleValue();
+    Double objDouble = this.get(var);
+    return objDouble.doubleValue();
   }
-
-  public Context() {
-    this.varList = new HashMap<>();
-    // initialize();
+  
+  public Set<String> getVarNames() {
+    return this.keySet();
   }
-
-  //Values are hardcoded to keep the example simple
-//  private void initialize() {
-//    assign("a", 20);
-//    assign("b", 40);
-//    assign("c", 30);
-//    assign("d", 10);
-//  }
   
   @Override
   public String toString() {
     String str = "";
-    for (String varName: varList.keySet())
-      str += varName + " = " + varList.get(varName) + ";\n";
+    for (String varName: this.getVarNames())
+      str += varName + " = " + this.getValue(varName) + ";\n";
 
     return str;
   }
