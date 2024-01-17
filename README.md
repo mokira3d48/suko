@@ -45,8 +45,8 @@ représentent les opérations.
 
 </div>
 
-- Les noeuds en forme de carré représentent les noeud terminaux.
-- Les noeuds en forme circulaire représentent les noeud non-terminaux.
+- Les noeuds en forme de carré représentent les noeuds terminaux.
+- Les noeuds en forme circulaire représentent les noeuds non-terminaux.
 
 Pour parvenir à obtenir ce modèle d'arbre, nous allons utiliser le design pattern **interpreter**.
 Voici donc le diagramme des classes modélisant cet arbre :
@@ -55,7 +55,7 @@ Voici donc le diagramme des classes modélisant cet arbre :
 	<img src="./images/interpreter.png" width="90%" height="90%"/>
 <p>
 
-*Figure 02* : Diagramme des classes du modèle interpreteur.
+*Figure 02* : Diagramme des classes du modèle interpreter.
 
 </p>
 <br/>
@@ -64,10 +64,10 @@ Voici donc le diagramme des classes modélisant cet arbre :
 
 - Les noeuds terminaux seront représentés par les instances de la classe `TerminalExpression`;
 - Les noeuds non-terminaux sont représentés par les instances de la classe `NonTerminalExpression`;
-- Le contexte `Context` encapsule la liste des variables de l'expression mappées leurs valeurs
+- Le contexte `Context` encapsule la liste des variables de l'équation mappées leurs valeurs
 respectives;
 
-Le modèle interpreter permet de définir une expression en fonction des variables qu'on peut
+Le modèle interpreter permet de définir une équation en fonction des variables qu'on peut
 renseigner avec leurs valeurs respectives. Ces variables sont représentées par des noeuds
 terminaux.
 
@@ -77,10 +77,10 @@ l'arbre de calcul. Ce qui fsera l'objet de la sous-section suivante.
 
 ### Analyseur
 Dans cette étape de conception, nous allons mettre en place l'analyseur qui va nous permettre
-de construire l'arbre du modèle interpreter à partir de l'expression reçue sous forme chaine de
+de construire l'arbre du modèle interpreter à partir de l'équation reçue sous forme chaine de
 caractères.
 
-L'expression reçue étant sous forme de chaine de caractères, on aura besoin de faire une chaine
+L'équation reçue étant sous forme de chaine de caractères, on aura besoin de faire une chaine
 de traitement à effectuer sur ce dernier celle-ci afin d'obtenir l'arbre de calcul résultant.
 C'est cette chaine de traitement qui constitue l'analyseur. Voici la chaine de traitement
 proposée :
@@ -98,9 +98,9 @@ proposée :
 
 Il y a juste deux étapes de traitement.
 
-Pour élaborer cette chaine de traitement, nous allons utiliser le design pattern **pipeline**.
+Pour élaborer cette chaine de traitement, nous allons utiliser le design pattern **Pipeline**.
 Ce modèle de conception permet de définir une chaine de responsabilité (processus)
-destiné à s'exécuter de façon séquentielle : l'une après l'autre. Voici donc le diagramme
+destinée à s'exécuter de façon séquentielle : l'une après l'autre. Voici donc le diagramme
 des classes modélisant cette chaine de traitement :
 
 
@@ -136,12 +136,12 @@ Expression treeRoot = analyser.execute("a * b + c - d");
 ### Instance de calculatrice
 Ici, il s'agira de "builder" une instance de la calculatrice (`Calculator`) muni de son analyseur.
 Pour cela nous allons utiliser le pattern **Builder** pour élaboler le programme qui va nous
-permettre de construire une instance de notre calculatrice. Voici sont diagramme des classes :
-
+permettre de construire une instance de notre calculatrice. Voici le diagramme des classes
+de l'analyseur :
 
 
 <div align="center">
-	<img src="./images/analyser.png" width="90%" height="90%"/>
+	<img src="./images/builder.png" width="90%" height="90%"/>
 <p>
 
 *Figure 04* : Diagramme des classes du buildeur d'un objet `Calculator`.
@@ -152,12 +152,17 @@ permettre de construire une instance de notre calculatrice. Voici sont diagramme
 </div>
 
 
-
-
-
 ## Implémentation
+Je ne vais pas détailler l'implémentation de toutes les classes énoncées dans la partie,
+mais je peux vous montrer le résultat d'implémentation sur un exemple d'équation. Je ferai
+la démonstraction sur exemple suivant :
+
+$$
+\alpha + x_2 \times x_3 - x_4 \times x_4 + x_4 \times (x_1 + \alpha) + \frac{x_5}{x_3 \times x_2}
+$$
 
 ### Construction d'une calculatrice
+Dans une première étape, on doit construire une instance de la calculatrice `Calculator`.
 
 ```java
 Builder<Calculator> b = new CalculatorBuilder();
@@ -167,6 +172,8 @@ Calculator calc = b.getResult();
 ```
 
 ### Définition du contexte
+On définit une instance d'un context qui encapsulera toutes les variables de l'équation
+associées à leur valeur.
 
 ```java
 // instantiate the context
@@ -182,20 +189,22 @@ ctx.assign("x6", 10);
 
 ```
 
-### Expression à évaluer
+### Équation à évaluer
+On définit ensuite l'équation en fonction de ces variables définies précédement.
 
 ```java
-calc.setExpression("alpha + x2 * x3 - x4 * x4 + x4 * (x1 + alpha) + x5 / (x3 * x2)");
+calc.setEquation("alpha + x2 * x3 - x4 * x4 + x4 * (x1 + alpha) + x5 / (x3 * x2)");
 calc.setContext(ctx);
 
 System.out.println(ctx);
-System.out.println("Expression = " + calc.getExpression());
+System.out.println("Equation = " + calc.getEquation());
 ```
 
 ![](./images/output01.png)
 
 
-### Evaluation de l'expression
+### Evaluation de l'équation
+Maintenant, on peut évaluer l'équation en appelant la fonction `evaluate()` de l'objet `calc`.
 
 ```java
 
