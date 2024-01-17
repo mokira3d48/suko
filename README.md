@@ -16,15 +16,65 @@ $$
 97 \times 985 + 109 - 229
 $$
 
+### Interpreteur
 L'expression à calculer sera représentée sous forme arborescence, dans un premier temps. C'est ce
 arbre de calcul qui sera évalué pour obtenir le résultat final. Danc, dans ce arbre de calcul,
 les branches représentent les termes et les noeuds représentent les opérations.
 
 <div align="center">
+	<img src="./images/tree_calculus.png" width="60%" height="60%"/>
+<p>
 
-<img src="./images/tree_calculus.png" width="60%" height="60%"/>
+*Figure 01* : Exemple d'un arbre de calcul.
+
+</p>
+<br/>
 
 </div>
+
+
+<div align="center">
+	<img src="./images/interpreter.png" width="90%" height="90%"/>
+<p>
+
+*Figure 02* : Diagramme des classes du modèle interpreteur.
+
+</p>
+<br/>
+
+</div>
+
+
+### Analyseur
+
+<div align="center">
+	<img src="./images/pipeline.png" width="90%" height="90%"/>
+<p>
+
+*Figure 03* : Pipeline de l'analyse et construction de l'abre de calcul.
+
+</p>
+<br/>
+
+</div>
+
+
+<div align="center">
+	<img src="./images/analyser.png" width="90%" height="90%"/>
+<p>
+
+*Figure 04* : Diagramme des classes de l'analyseur.
+
+</p>
+<br/>
+
+</div>
+
+### Instance de calculatrice
+Ici, il s'agira de "builder" une instance de la calculatrice (`Calculator`) muni de son analyseur.
+Pour cela nous allons utiliser le pattern Builder pour élaboler le programme qui va nous permettre
+de construire une instance de notre calculatrice.
+
 
 
 ## Implémentation
