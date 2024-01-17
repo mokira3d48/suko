@@ -7,6 +7,18 @@
 </div>
 
 ## Spécifications
+Développez une calculatrice dotée d’une interface qui reçoit les informations entrées par l’utilisateur. Ces informations permettront de calculer le résultat des opérations.
+
+- **Etape 0** : La calculatrice attend la saisie du premier terme.
+- **Etape 1** : D’abord le premier terme est entré par la fourniture successive du (ou des) chiffre(s) le composant.
+- **Etape 2** : Ensuite, un symbole est fourni par l’entrée d’un des signes des opérations acceptés par la calculatrice (+ -  DIV *).
+- **Etape 3** : Et enfin le deuxième terme qui sera composé de 1 ou plusieurs chiffres aussi sera entré.
+- **Etape 4** : Apres cette étape, l’utilisateur devra taper le signe = et le résultat définitif de l’opération lui sera affiché et la calculatrice reviendra à l’**étape 1**.
+A l’entrée de « C », l’opération est remise à zéro, et on revient à l’**étape 0**.
+
+> **NOTE** : l’application pourra ne gérer que les nombres entiers dans un premier temps. Ensuite, elle ne devra gérer que les cas normaux de fonctionnement. Ainsi, les cas exceptionnels d’erreur (cas anormaux) ne seront pas pris en compte (Exemple : appui sur = après saisie de la première opérande)
+
+## Conception
 Dans une expression, nous avons des opérations et des termes. Les différentes opérations possibles
 que nous pouvons avoir sont des additions, multiplications, soustrations et divisions. Les termes
 ne sont uniquement que des nombres entiers. Donc, il n'y aura aucune implémentation pour gérer
@@ -17,9 +29,10 @@ $$
 $$
 
 ### Interpreteur
-L'expression à calculer sera représentée sous forme arborescence, dans un premier temps. C'est ce
-arbre de calcul qui sera évalué pour obtenir le résultat final. Danc, dans ce arbre de calcul,
-les branches représentent les termes et les noeuds représentent les opérations.
+L'expression à calculer sera représentée sous forme arborescente, dans un premier temps. C'est ce
+arbre de calcul qui sera évalué pour obtenir le résultat final. Dans l'exemple
+suivant, les noeuds en forme de carré représentent les termes et les noeuds en forme circulaire
+représentent les opérations.
 
 <div align="center">
 	<img src="./images/tree_calculus.png" width="60%" height="60%"/>
@@ -32,6 +45,8 @@ les branches représentent les termes et les noeuds représentent les opération
 
 </div>
 
+- Les noeuds en forme de carré représentent les noeud terminaux.
+- Les noeuds en forme circulaire représentent les noeud non-terminaux.
 
 <div align="center">
 	<img src="./images/interpreter.png" width="90%" height="90%"/>
@@ -70,10 +85,27 @@ les branches représentent les termes et les noeuds représentent les opération
 
 </div>
 
+
+```java
+Pipeline<String, Expression> analyser = null;
+analyser = new Pipeline<>(new Preprocess(...)).addHandler(new TreeBuilder(...));
+
+```
+
+Et pour une expression bien définit sous forme chaine de caractères, on pourra faire comme suit :
+
+```java
+Expression treeRoot = analyser.execute("a * b + c - d");
+```
+
+`treeRoot` sera donc le noeud racine de l'arbre de calcul généré pour cet expression.
+
 ### Instance de calculatrice
 Ici, il s'agira de "builder" une instance de la calculatrice (`Calculator`) muni de son analyseur.
 Pour cela nous allons utiliser le pattern Builder pour élaboler le programme qui va nous permettre
 de construire une instance de notre calculatrice.
+
+
 
 
 
