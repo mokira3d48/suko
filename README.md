@@ -35,7 +35,7 @@ suivant, les noeuds en forme de carré représentent les termes et les noeuds en
 représentent les opérations.
 
 <div align="center">
-	<img src="./images/tree_calculus.png" width="60%" height="60%"/>
+	<img src="./images/tree_calculus.png" width="80%" height="80%"/>
 <p>
 
 *Figure 01* : Exemple d'un arbre de calcul.
@@ -48,6 +48,9 @@ représentent les opérations.
 - Les noeuds en forme de carré représentent les noeud terminaux.
 - Les noeuds en forme circulaire représentent les noeud non-terminaux.
 
+Pour parvenir à obtenir ce modèle d'arbre, nous allons utiliser le design pattern **interpreter**.
+Voici donc le diagramme des classes modélisant cet arbre :
+
 <div align="center">
 	<img src="./images/interpreter.png" width="90%" height="90%"/>
 <p>
@@ -59,19 +62,46 @@ représentent les opérations.
 
 </div>
 
+- Les noeuds terminaux seront représentés par les instances de la classe `TerminalExpression`;
+- Les noeuds non-terminaux sont représentés par les instances de la classe `NonTerminalExpression`;
+- Le contexte `Context` encapsule la liste des variables de l'expression mappées leurs valeurs
+respectives;
+
+Le modèle interpreter permet de définir une expression en fonction des variables qu'on peut
+renseigner avec leurs valeurs respectives. Ces variables sont représentées par des noeuds
+terminaux.
+
+Par contre, ce modèle ne permet pas d'implémenter l'analyseur qui permettra de construire
+l'arbre de calcul. Ce qui fsera l'objet de la sous-section suivante.
+
 
 ### Analyseur
+Dans cette étape de conception, nous allons mettre en place l'analyseur qui va nous permettre
+de construire l'arbre du modèle interpreter à partir de l'expression reçue sous forme chaine de
+caractères.
+
+L'expression reçue étant sous forme de chaine de caractères, on aura besoin de faire une chaine
+de traitement à effectuer sur ce dernier celle-ci afin d'obtenir l'arbre de calcul résultant.
+C'est cette chaine de traitement qui constitue l'analyseur. Voici la chaine de traitement
+proposée :
 
 <div align="center">
 	<img src="./images/pipeline.png" width="90%" height="90%"/>
 <p>
 
-*Figure 03* : Pipeline de l'analyse et construction de l'abre de calcul.
+*Figure 03* : Pipeline de l'analyse et construction de l'arbre de calcul.
 
 </p>
 <br/>
 
 </div>
+
+Il y a juste deux étapes de traitement.
+
+Pour élaborer cette chaine de traitement, nous allons utiliser le design pattern **pipeline**.
+Ce modèle de conception permet de définir une chaine de responsabilité (processus)
+destiné à s'exécuter de façon séquentielle : l'une après l'autre. Voici donc le diagramme
+des classes modélisant cette chaine de traitement :
 
 
 <div align="center">
@@ -85,6 +115,7 @@ représentent les opérations.
 
 </div>
 
+Après l'implémentation, on pourra écrire le code suivant pour initialiser l'analyseur.
 
 ```java
 Pipeline<String, Expression> analyser = null;
@@ -96,14 +127,29 @@ Et pour une expression bien définit sous forme chaine de caractères, on pourra
 
 ```java
 Expression treeRoot = analyser.execute("a * b + c - d");
+
 ```
 
-`treeRoot` sera donc le noeud racine de l'arbre de calcul généré pour cet expression.
+`treeRoot` sera donc le noeud racine de l'arbre de calcul résultant de l'expression `a * b + c - d`
+.
 
 ### Instance de calculatrice
 Ici, il s'agira de "builder" une instance de la calculatrice (`Calculator`) muni de son analyseur.
-Pour cela nous allons utiliser le pattern Builder pour élaboler le programme qui va nous permettre
-de construire une instance de notre calculatrice.
+Pour cela nous allons utiliser le pattern **Builder** pour élaboler le programme qui va nous
+permettre de construire une instance de notre calculatrice. Voici sont diagramme des classes :
+
+
+
+<div align="center">
+	<img src="./images/analyser.png" width="90%" height="90%"/>
+<p>
+
+*Figure 04* : Diagramme des classes du buildeur d'un objet `Calculator`.
+
+</p>
+<br/>
+
+</div>
 
 
 
