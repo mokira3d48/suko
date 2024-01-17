@@ -32,7 +32,7 @@ $$
 L'expression à calculer sera représentée sous forme arborescente, dans un premier temps. C'est ce
 arbre de calcul qui sera évalué pour obtenir le résultat final. Dans l'exemple
 suivant, les noeuds en forme de carré représentent les termes et les noeuds en forme circulaire
-représentent les opérations.
+représentent les opérations ($+, -, \times \div$).
 
 <div align="center">
 	<img src="./images/tree_calculus.png" width="80%" height="80%"/>
@@ -62,8 +62,8 @@ Voici donc le diagramme des classes modélisant cet arbre :
 
 </div>
 
-- Les noeuds terminaux seront représentés par les instances de la classe `TerminalExpression`;
-- Les noeuds non-terminaux sont représentés par les instances de la classe `NonTerminalExpression`;
+- Les noeuds terminaux seront représentés par les instances de la classe `TerminalNode`;
+- Les noeuds non-terminaux sont représentés par les instances de la classe `NonTerminalNode`;
 - Le contexte `Context` encapsule la liste des variables de l'équation mappées leurs valeurs
 respectives;
 
@@ -72,7 +72,7 @@ renseigner avec leurs valeurs respectives. Ces variables sont représentées par
 terminaux.
 
 Par contre, ce modèle ne permet pas d'implémenter l'analyseur qui permettra de construire
-l'arbre de calcul. Ce qui fsera l'objet de la sous-section suivante.
+l'arbre de calcul. Ce qui fera l'objet de la sous-section suivante.
 
 
 ### Analyseur
@@ -210,6 +210,7 @@ Maintenant, on peut évaluer l'équation en appelant la fonction `evaluate()` de
 
 try {
 	Double result = calc.evaluate();
+	// On convertie le resultat en entier avant de l'afficher.
 	System.out.println("Result = " + result.intValue());
 } catch (SemanticError e) {
 	System.out.println("SemanticError: \t" + e);
