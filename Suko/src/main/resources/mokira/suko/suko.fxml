@@ -7,7 +7,7 @@
 <?import java.net.URL?>
 
 
-<AnchorPane onKeyPressed="#handleOnKeyPressed" prefWidth="550" prefHeight="500"  fx:controller="mokira.suko.PrimaryController"
+<AnchorPane onKeyPressed="#handleOnKeyPressed" prefWidth="550" prefHeight="500"  fx:controller="mokira.suko.MainController"
           xmlns:fx="http://javafx.com/fxml">
 
     <stylesheets>

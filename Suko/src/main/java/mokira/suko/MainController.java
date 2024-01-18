@@ -19,7 +19,7 @@ import mokira.suko.calc.interpreter.SemanticError;
  *
  * @author mokira3d48
  */
-public class PrimaryController {
+public class MainController {
   @FXML
   private Label outputLabel;
 
@@ -31,7 +31,7 @@ public class PrimaryController {
   private boolean hasError = false;
   private SukoCalculator calculator;
 
-  public PrimaryController() {
+  public MainController() {
     storedExpr = new ArrayList<>();
     calculator = new SukoCalculAdapter();
   }
@@ -96,7 +96,7 @@ public class PrimaryController {
 
   public void handleBinaryButtonClick(ActionEvent event) {
     Button button = (Button) event.getSource();
-    String binaryOperatorString = button.getText() + " ";
+    String binaryOperatorString = button.getText();
     enterOperation(binaryOperatorString);
   }
 
@@ -169,13 +169,13 @@ public class PrimaryController {
     if (keyCode.startsWith("NUMPAD"))
       enterNumber(event.getText());
     else if (keyCode.equals("ADD"))
-      enterOperation("+ ");
+      enterOperation("+");
     else if (keyCode.equals("SUBTRACT"))
-      enterOperation("- ");
+      enterOperation("-");
     else if (keyCode.equals("MULTIPLY"))
-      enterOperation("* ");
+      enterOperation("*");
     else if (keyCode.equals("DIVIDE"))
-      enterOperation("/ ");
+      enterOperation("/");
     else if (keyCode.equals("DELETE"))
       clearEntry();
     else if (keyCode.equals("BACK_SPACE"))
