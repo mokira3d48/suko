@@ -164,8 +164,15 @@ public class MainController {
   public void handleOnKeyPressed(KeyEvent event) {
     // System.out.println("Pressed key text: " + event.getText());
     // System.out.println("Pressed key code: " + event.getCode());
-
+    
     String keyCode = event.getCode().toString();
+    
+    // Apres un calcul, si l'utilisateur appuis sur la touche
+    // suppression ou back space de son clavier, on fera un reset.
+    if (this.hasCalculated)
+      if (keyCode.equals("BACK_SPACE") || keyCode.equals("DELETE"))
+        reset();
+
     if (keyCode.startsWith("NUMPAD"))
       enterNumber(event.getText());
     else if (keyCode.equals("ADD"))
