@@ -1,10 +1,37 @@
 # SuKo
 
+![](https://img.shields.io/badge/pattern-MVC-blue)
+![](https://img.shields.io/badge/build-success-success)
+![](https://img.shields.io/badge/IDE-Netbeans-green)
+![](https://img.shields.io/badge/contact-dr.mokira%40gmail.com-blueviolet)
+
+Une calculatrice simple avec interface graphique développée en **JavaFX** et **FXML + CSS**.
+Elle ne gère pas les nombres à virgule, ni les parenthèse ni autres fonctions mathématiques
+complexes à part l'addition, la soustration, la multiplication et la division.
+
+Vous pouvez utiliser les boutons présents sur l'interface utilisateur
+ou utiliser le pavé numérique de votre clavier pour interagir avec le logiciel.
+
+<br/>
+<br/>
+
 <div align="center">
 
 ![](./images/suko_screenshot.png)
 
 </div>
+
+- Appuyez sur `[ENTER]` de votre clavier ou *=* de la calculatrice pour avoir le résultat;
+- Appuyez sur `[C]` de votre clavier ou le bouton **C** de la calculatrice
+pour reinitialiser la calculatrice;
+- Appuyez sur `[DELETE]` de votre clavier ou le bouton **CE** de la calculatrice pour effacer
+le champs de saisi inférieur.
+- Appuyez sur `[BACK SPACE]` de votre clavier ou le bouton **DEL** de la calculatrice pour
+effacer chiffre par chiffre le nombre saisi sur la champs de saisi inférieur.
+- Vous avez la possibilité de changer l'opérateur précédement saisi en appuyant sur une des
+touche des opérateurs ( + - * /), ceci même si vous aviez déjà saisi un nombre dans champs
+de saisi inférieur.
+
 
 ## Spécifications
 Développez une calculatrice dotée d’une interface qui reçoit les informations entrées par l’utilisateur. Ces informations permettront de calculer le résultat des opérations.
