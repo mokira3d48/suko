@@ -10,6 +10,14 @@ import mokira.suko.calc.Context;
  *
  * @author mokira3d48
  */
-public interface Expression {
+public interface Node {
+
+  /**
+   *
+   * @param c
+   * @return
+   * @throws Exception
+   */
   public double evaluate(Context c) throws Exception;
+
 }

@@ -5,20 +5,22 @@
 package mokira.suko.calc.interpreter;
 
 import mokira.suko.calc.Context;
-import mokira.suko.calc.interpreter.Expression;
+
 
 /**
  *
  * @author mokira3d48
  */
-public class TerminalExpression implements Expression {
+public class TerminalNode implements Node {
   private String var;
 
-  public TerminalExpression(String v) {
-    var = v;
+  public TerminalNode(String v) {
+    this.var = v;
   }
 
   public double evaluate(Context c) {
+    // on recupere juste la valeur de cette variable
+    // depuis le context.
     return c.getValue(var);
   }
 }

@@ -10,19 +10,21 @@ import mokira.suko.calc.Context;
  *
  * @author mokira3d48
  */
-public class AddExpression extends NonTerminalExpression {
-  
-  public AddExpression() {
-    
-  }
+public class AddNode extends NonTerminalNode {
 
-  public AddExpression(Expression l, Expression r) {
+  public AddNode(Node l, Node r) {
     super(l, r);
   }
   
+  /**
+   *
+   * @param c
+   * @return
+   * @throws Exception
+   */
   @Override
   public double evaluate(Context c) throws Exception{
-    return getLeftNode().evaluate(c) + getRightNode().evaluate(c);
+    return this.leftNode.evaluate(c) + this.rightNode.evaluate(c);
   }
 
 }

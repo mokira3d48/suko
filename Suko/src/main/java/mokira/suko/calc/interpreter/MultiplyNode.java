@@ -6,28 +6,26 @@ package mokira.suko.calc.interpreter;
 
 import mokira.suko.calc.Context;
 
+
 /**
  *
  * @author mokira3d48
  */
-public class DivisionExpression extends NonTerminalExpression {
+public class MultiplyNode extends NonTerminalNode {
 
-  public DivisionExpression() {
-
-  }
-
-  public DivisionExpression(Expression l, Expression r) {
+  public MultiplyNode(Node l, Node r) {
     super(l, r);
   }
 
+  /**
+   *
+   * @param c
+   * @return
+   * @throws Exception
+   */
   @Override
   public double evaluate(Context c) throws Exception {
-    double term1 = getLeftNode().evaluate(c);
-    double term2 = getRightNode().evaluate(c);
-    
-    if (term2 == 0.0)
-      throw new SemanticError("{" + term1 + " / 0} --> Division by zero detected.");
-
-    return term1 / term2;
+    return this.leftNode.evaluate(c) * this.rightNode.evaluate(c);
   }
+
 }

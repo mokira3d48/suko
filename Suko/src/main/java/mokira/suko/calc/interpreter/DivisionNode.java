@@ -5,25 +5,31 @@
 package mokira.suko.calc.interpreter;
 
 import mokira.suko.calc.Context;
-import mokira.suko.calc.interpreter.Expression;
 
 /**
  *
  * @author mokira3d48
  */
-public class MultiplyExpression extends NonTerminalExpression {
+public class DivisionNode extends NonTerminalNode {
 
-  public MultiplyExpression() {
-
-  }
-
-  public MultiplyExpression(Expression l, Expression r) {
+  public DivisionNode(Node l, Node r) {
     super(l, r);
   }
 
+  /**
+   *
+   * @param c
+   * @return
+   * @throws Exception
+   */
   @Override
   public double evaluate(Context c) throws Exception {
-    return getLeftNode().evaluate(c) * getRightNode().evaluate(c);
-  }
+    double term1 = this.leftNode.evaluate(c);
+    double term2 = this.rightNode.evaluate(c);
+    
+    if (term2 == 0.0)
+      throw new SemanticError("{" + term1 + " / 0} --> Division by zero detected.");
 
+    return term1 / term2;
+  }
 }

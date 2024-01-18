@@ -4,12 +4,12 @@
  */
 package mokira.suko.calc;
 
-import mokira.suko.calc.interpreter.SubtractExpression;
-import mokira.suko.calc.interpreter.NonTerminalExpression;
-import mokira.suko.calc.interpreter.MultiplyExpression;
-import mokira.suko.calc.interpreter.Expression;
-import mokira.suko.calc.interpreter.DivisionExpression;
-import mokira.suko.calc.interpreter.AddExpression;
+import mokira.suko.calc.interpreter.SubtractNode;
+import mokira.suko.calc.interpreter.NonTerminalNode;
+import mokira.suko.calc.interpreter.MultiplyNode;
+import mokira.suko.calc.interpreter.Node;
+import mokira.suko.calc.interpreter.DivisionNode;
+import mokira.suko.calc.interpreter.AddNode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -24,7 +24,7 @@ import mokira.suko.calc.analyser.TreeBuilder;
 public class CalculatorBuilder implements Builder<Calculator> {
   private Calculator calculator;
   private Map<String, Integer> operators;
-  private Map<String, BiFunction<Expression, Expression, NonTerminalExpression>> expressions;
+  private Map<String, BiFunction<Node, Node, NonTerminalNode>> expressions;
 
   public CalculatorBuilder() {
     this.reset();
@@ -53,10 +53,10 @@ public class CalculatorBuilder implements Builder<Calculator> {
   @Override
   public void setNonTerminalExpressions() {
     expressions = new HashMap<>();
-    expressions.put("+", (l, r) -> new AddExpression(l, r));
-    expressions.put("-", (l, r) -> new SubtractExpression(l, r));
-    expressions.put("*", (l, r) -> new MultiplyExpression(l, r));
-    expressions.put("/", (l, r) -> new DivisionExpression(l, r));
+    expressions.put("+", (l, r) -> new AddNode(l, r));
+    expressions.put("-", (l, r) -> new SubtractNode(l, r));
+    expressions.put("*", (l, r) -> new MultiplyNode(l, r));
+    expressions.put("/", (l, r) -> new DivisionNode(l, r));
   }
 
   @Override

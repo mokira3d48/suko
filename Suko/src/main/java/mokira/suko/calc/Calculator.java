@@ -4,7 +4,7 @@
  */
 package mokira.suko.calc;
 
-import mokira.suko.calc.interpreter.Expression;
+import mokira.suko.calc.interpreter.Node;
 import mokira.suko.calc.analyser.Pipeline;
 
 
@@ -35,7 +35,7 @@ public class Calculator {
   }
 
   public double evaluate() throws Exception {
-    Expression rootNode = (Expression) this.analyser.execute(expression, context);
+    Node rootNode = (Node) this.analyser.execute(expression, context);
 
     // Evaluate the tree
     return rootNode.evaluate(this.context);

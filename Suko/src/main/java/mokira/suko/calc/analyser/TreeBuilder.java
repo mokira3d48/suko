@@ -12,19 +12,19 @@ import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 import mokira.suko.calc.Context;
-import mokira.suko.calc.interpreter.Expression;
-import mokira.suko.calc.interpreter.NonTerminalExpression;
-import mokira.suko.calc.interpreter.TerminalExpression;
+import mokira.suko.calc.interpreter.Node;
+import mokira.suko.calc.interpreter.NonTerminalNode;
+import mokira.suko.calc.interpreter.TerminalNode;
 
 /**
  *
  * @author mokira3d48
  */
-public class TreeBuilder implements Handler<String, Context, Expression> {
-  private Map<String, BiFunction<Expression, Expression, NonTerminalExpression>> operators;
+public class TreeBuilder implements Handler<String, Context, Node> {
+  private Map<String, BiFunction<Node, Node, NonTerminalNode>> operators;
   private List<String> variableNames;
 
-  public TreeBuilder(Map<String, BiFunction<Expression, Expression, NonTerminalExpression>> ops) {
+  public TreeBuilder(Map<String, BiFunction<Node, Node, NonTerminalNode>> ops) {
     this.operators = ops;
     this.variableNames = new ArrayList<>();
   }
@@ -35,7 +35,7 @@ public class TreeBuilder implements Handler<String, Context, Expression> {
   }
 
   @Override
-  public Expression process(String input, Context context) throws Exception {
+  public Node process(String input, Context context) throws Exception {
     Stack s = new Stack();
     String buffer = "";
 
@@ -47,22 +47,22 @@ public class TreeBuilder implements Handler<String, Context, Expression> {
         // s.push(e);
         buffer += currChar;
       } else {
-        Expression r = (Expression) s.pop();
-        Expression l = (Expression) s.pop();
-        Expression n = getNonTerminalExpr(currChar, l, r);
+        Node r = (Node) s.pop();
+        Node l = (Node) s.pop();
+        Node n = getNonTerminalExpr(currChar, l, r);
         s.push(n);
       }
 
       if (isVariableName(buffer, context)) {
-        Expression e = new TerminalExpression(buffer);
+        Node e = new TerminalNode(buffer);
         s.push(e);
         buffer = "";
       }
     }
-    return (Expression) s.pop();
+    return (Node) s.pop();
   }
 
-  private NonTerminalExpression getNonTerminalExpr(String opString, Expression l, Expression r) {
+  private NonTerminalNode getNonTerminalExpr(String opString, Node l, Node r) {
 //    if (operation.trim().equals("+")) {
 //      return new AddExpression(l, r);
 //    }
@@ -86,9 +86,9 @@ public class TreeBuilder implements Handler<String, Context, Expression> {
         return null;
 
       String firstOpStr = opFound.get(0);
-      BiFunction<Expression, Expression, NonTerminalExpression> getInstance;
+      BiFunction<Node, Node, NonTerminalNode> getInstance;
       getInstance = this.operators.get(firstOpStr);
-      NonTerminalExpression returned = getInstance.apply(l, r);
+      NonTerminalNode returned = getInstance.apply(l, r);
 
 //      System.out.println(opString + " - " + returned.getClass().getName());
       return returned;
