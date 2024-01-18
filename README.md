@@ -1,4 +1,4 @@
-# Super Kalculator
+# SuKo
 
 <div align="center">
 
