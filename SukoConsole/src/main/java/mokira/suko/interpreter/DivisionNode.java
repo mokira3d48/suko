@@ -10,20 +10,22 @@ import mokira.suko.Context;
  *
  * @author mokira3d48
  */
-public class DivisionExpression extends NonTerminalExpression {
+public class DivisionNode extends NonTerminalNode {
 
-  public DivisionExpression() {
-
-  }
-
-  public DivisionExpression(Expression l, Expression r) {
+  public DivisionNode(Node l, Node r) {
     super(l, r);
   }
 
+  /**
+   *
+   * @param c
+   * @return
+   * @throws Exception
+   */
   @Override
   public double evaluate(Context c) throws Exception {
-    double term1 = getLeftNode().evaluate(c);
-    double term2 = getRightNode().evaluate(c);
+    double term1 = this.leftNode.evaluate(c);
+    double term2 = this.rightNode.evaluate(c);
     
     if (term2 == 0.0)
       throw new SemanticError("{" + term1 + " / 0} --> Division by zero detected.");

@@ -4,26 +4,17 @@
  */
 package mokira.suko;
 
-import mokira.suko.interpreter.Expression;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
-import java.util.function.BiFunction;
-import mokira.suko.analyser.Handler;
 import mokira.suko.analyser.Pipeline;
-import mokira.suko.analyser.Preprocess;
-import mokira.suko.analyser.TreeBuilder;
+import mokira.suko.interpreter.Node;
 
 /**
  *
  * @author mokira3d48
  */
 public class Calculator {
-  private String expression;
+  private String equation;
 //  private Map<String, Integer> operators;
-//  private Map<String, BiFunction<Expression, Expression, NonTerminalExpression>> expressions;
+//  private Map<String, BiFunction<Expression, Node, NonTerminalExpression>> expressions;
   private Context context;
 //  private List<Handler> handlers;
   private Pipeline analyser;
@@ -46,21 +37,21 @@ public class Calculator {
   }
 
 //  public Calculator(Map<String, Integer> operators,
-//                    Map<String, BiFunction<Expression, Expression, NonTerminalExpression>> exprs) {
+//                    Map<String, BiFunction<Expression, Node, NonTerminalExpression>> exprs) {
 //    this.operators = operators;
 //    this.expressions = exprs;
 //  }
 
-  public void setExpression(String expr) {
-    this.expression = expr;
+  public void setEquation(String expr) {
+    this.equation = expr;
   }
 
   public void setContext(Context c) {
     this.context = c;
   }
 
-  public String getExpression() {
-    return expression;
+  public String getEquation() {
+    return this.equation;
   }
   
 //  public void addHandler(Handler step) {
@@ -93,8 +84,8 @@ public class Calculator {
     // String pfExpr = infixToPostFix(expression);
 
     //build the Binary Tree
-    // Expression rootNode = buildTree(pfExpr);
-    Expression rootNode = (Expression) this.analyser.execute(expression, context);
+    // Node rootNode = buildTree(pfExpr);
+    Node rootNode = (Node) this.analyser.execute(equation, context);
 
     //Evaluate the tree
     return rootNode.evaluate(this.context);

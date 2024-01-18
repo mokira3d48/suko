@@ -33,7 +33,7 @@ public class SukoConsole {
     ctx.assign("x6", 10);
 
     // set the expression to evaluate
-    calc.setExpression("alpha + x2 * x3 - x4 * x4 + x4 * (x1 + alpha) + x5 / (x3 * x2)");
+    calc.setEquation("alpha + x2 * x3 - x4 * x4 + x4 * (x1 + alpha) + x5 / (x3 * x2)");
 
 //    calc.setExpression("a+b*c-d*d+e-d*(a+c)");
 //    
@@ -49,7 +49,7 @@ public class SukoConsole {
 
     // Display the result
     System.out.println(ctx);
-    System.out.println("Expression = " + calc.getExpression());
+    System.out.println("Equation = " + calc.getEquation());
 
     try {
       	Double result = calc.evaluate();

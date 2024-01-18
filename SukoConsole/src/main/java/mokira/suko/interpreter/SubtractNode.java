@@ -5,24 +5,21 @@
 package mokira.suko.interpreter;
 
 import mokira.suko.Context;
+import mokira.suko.interpreter.NonTerminalNode;
+import mokira.suko.interpreter.Node;
 
 /**
  *
  * @author mokira3d48
  */
-public class AddExpression extends NonTerminalExpression {
-  
-  public AddExpression() {
-    
-  }
-
-  public AddExpression(Expression l, Expression r) {
+public class SubtractNode extends NonTerminalNode {
+ 
+  public SubtractNode(Node l, Node r) {
     super(l, r);
   }
-  
-  @Override
-  public double evaluate(Context c) throws Exception{
-    return getLeftNode().evaluate(c) + getRightNode().evaluate(c);
-  }
 
+  @Override
+  public double evaluate(Context c) throws Exception {
+    return this.leftNode.evaluate(c) - this.rightNode.evaluate(c);
+  }
 }
