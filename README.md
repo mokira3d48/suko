@@ -6,8 +6,9 @@
 ![](https://img.shields.io/badge/contact-dr.mokira%40gmail.com-blueviolet)
 
 Une calculatrice simple avec interface graphique développée en **JavaFX** et **FXML + CSS**.
-Elle ne gère pas les nombres à virgule, ni les parenthèse ni autres fonctions mathématiques
-complexes à part l'addition, la soustration, la multiplication et la division.
+Comme spécifié ci-dessous, elle ne gère pas les nombres à virgule, ni les parenthèses ni
+autres fonctions mathématiques complexes à part l'addition, la soustration, la multiplication
+et la division.
 
 Vous pouvez utiliser les boutons présents sur l'interface utilisateur
 ou utiliser le pavé numérique de votre clavier pour interagir avec le logiciel.
