@@ -186,11 +186,11 @@ non-terminal respectives.
 Et pour une équation bien définit sous forme chaine de caractères, on pourra faire comme suit :
 
 ```java
-Expression treeRoot = analyser.execute("a * b + c - d");
+Node treeRoot = analyser.execute("a * b + c - d");
 
 ```
 
-`treeRoot` sera donc le noeud racine de l'arbre de calcul résultant de l'expression `a * b + c - d`
+`treeRoot` sera donc le noeud racine de l'arbre de calcul résultant de l'équation `a * b + c - d`
 .
 
 ### Instance de calculatrice
