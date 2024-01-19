@@ -13,21 +13,21 @@ import mokira.suko.calc.analyser.Pipeline;
  * @author mokira3d48
  */
 public class Calculator {
-  private String expression;
+  private String equation;
   private Context context;
   private Pipeline analyser;
 
 
-  public void setExpression(String expr) {
-    this.expression = expr;
+  public void setEquation(String expr) {
+    this.equation = expr;
   }
 
   public void setContext(Context c) {
     this.context = c;
   }
 
-  public String getExpression() {
-    return expression;
+  public String getEquation() {
+    return this.equation;
   }
   
   public void setAnalyser(Pipeline analyser) {
@@ -35,7 +35,7 @@ public class Calculator {
   }
 
   public double evaluate() throws Exception {
-    Node rootNode = (Node) this.analyser.execute(expression, context);
+    Node rootNode = (Node) this.analyser.execute(equation, context);
 
     // Evaluate the tree
     return rootNode.evaluate(this.context);

@@ -105,7 +105,7 @@ public class SukoCalculAdapter implements SukoCalculator {
     // System.out.println("Mapped expression: \t" + exprMapped);
 
     // Renseigner l'expression a evaluer
-    this.calculator.setExpression(exprMapped);
+    this.calculator.setEquation(exprMapped);
 
     //
     this.calculator.setContext(ctx);
