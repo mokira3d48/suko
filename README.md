@@ -1,9 +1,15 @@
-# SuKo
+<div align="center"><img src="./images/suko.png" /></div>
+
+-------------------------------------------------------------------------------
+<div align="center">
 
 ![](https://img.shields.io/badge/pattern-MVC-blue)
 ![](https://img.shields.io/badge/build-success-success)
 ![](https://img.shields.io/badge/IDE-Netbeans-green)
 ![](https://img.shields.io/badge/contact-dr.mokira%40gmail.com-blueviolet)
+
+</div>
+<br/>
 
 Une calculatrice simple avec interface graphique développée en **JavaFX** et **FXML + CSS**.
 Comme spécifié ci-dessous, elle ne gère pas les nombres à virgule, ni les parenthèses ni
@@ -155,7 +161,7 @@ analyser = new Pipeline<>(new Preprocess(...)).addHandler(new TreeBuilder(...));
 ```
 
 - `Preprocess` a besoin de la liste de tous les opérateurs mappés avec leur niveau de
-riorité (de 1 à $+\inf$).
+riorité (de 1 à $+\infty$).
 
 ```
 {"+": 1};
