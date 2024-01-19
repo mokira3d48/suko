@@ -14,7 +14,7 @@ public interface Builder<T> {
 
   public void setOperators();
 
-  public void setNonTerminalExpressions();
+  public void setNonTerminalNodes();
 
   public void setAnalyser();
 

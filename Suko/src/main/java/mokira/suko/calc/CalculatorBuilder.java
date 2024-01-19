@@ -24,7 +24,7 @@ import mokira.suko.calc.analyser.TreeBuilder;
 public class CalculatorBuilder implements Builder<Calculator> {
   private Calculator calculator;
   private Map<String, Integer> operators;
-  private Map<String, BiFunction<Node, Node, NonTerminalNode>> expressions;
+  private Map<String, BiFunction<Node, Node, NonTerminalNode>> nodes;
 
   public CalculatorBuilder() {
     this.reset();
@@ -51,18 +51,18 @@ public class CalculatorBuilder implements Builder<Calculator> {
   }
 
   @Override
-  public void setNonTerminalExpressions() {
-    expressions = new HashMap<>();
-    expressions.put("+", (l, r) -> new AddNode(l, r));
-    expressions.put("-", (l, r) -> new SubtractNode(l, r));
-    expressions.put("*", (l, r) -> new MultiplyNode(l, r));
-    expressions.put("/", (l, r) -> new DivisionNode(l, r));
+  public void setNonTerminalNodes() {
+    nodes = new HashMap<>();
+    nodes.put("+", (l, r) -> new AddNode(l, r));
+    nodes.put("-", (l, r) -> new SubtractNode(l, r));
+    nodes.put("*", (l, r) -> new MultiplyNode(l, r));
+    nodes.put("/", (l, r) -> new DivisionNode(l, r));
   }
 
   @Override
   public void setAnalyser() {
     var pipelineAnalyser = new Pipeline<>(new Preprocess(this.operators))
-            .addHandler(new TreeBuilder(this.expressions));
+            .addHandler(new TreeBuilder(this.nodes));
     this.calculator.setAnalyser(pipelineAnalyser);
   }
 

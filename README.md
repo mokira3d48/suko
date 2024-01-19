@@ -13,6 +13,9 @@ et la division.
 Vous pouvez utiliser les boutons présents sur l'interface utilisateur
 ou utiliser le pavé numérique de votre clavier pour interagir avec le logiciel.
 
+- Le projet de l'application avec interface graphique se trouve dans le dossier `Suko`.
+- Le projet de l'application avec interface console se trouve dans le dossier `SukoConsole`.
+
 <br/>
 <br/>
 
@@ -151,7 +154,30 @@ analyser = new Pipeline<>(new Preprocess(...)).addHandler(new TreeBuilder(...));
 
 ```
 
-Et pour une expression bien définit sous forme chaine de caractères, on pourra faire comme suit :
+- `Preprocess` a besoin de la liste de tous les opérateurs mappés avec leur niveau de
+riorité (de 1 à $+\inf$).
+
+```
+{"+": 1};
+{"-": 1};
+{"/": 2};
+{"*": 2};
+
+```
+
+Plus ce nombre augment pour un opérateur plus ce opérateur a plus de priorié.
+
+- `TreeBuilder` a besoin de la liste des opérateurs mappés avec leur instance de noeud
+non-terminal respectives.
+
+```
+{"+": (l, r) -> new AddNode(l, r)}
+{"-": (l, r) -> new SubtractNode(l, r)};
+{"*": (l, r) -> new MultiplyNode(l, r)};
+{"/": (l, r) -> new DivisionNode(l, r)};
+```
+
+Et pour une équation bien définit sous forme chaine de caractères, on pourra faire comme suit :
 
 ```java
 Expression treeRoot = analyser.execute("a * b + c - d");
@@ -249,3 +275,6 @@ try {
 ```
 
 ![](./images/output02.png)
+
+Le programme a tout simplement remplacé les valeurs du contexte par leur variable dans l'équation
+avant d'éffectuer le calcul.

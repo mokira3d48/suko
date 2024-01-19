@@ -22,7 +22,7 @@ public class Director {
 
   public void makeBuild() {
     this.builder.setOperators();
-    this.builder.setNonTerminalExpressions();
+    this.builder.setNonTerminalNodes();
     this.builder.setAnalyser();
   }
 }
